@@ -1,0 +1,15 @@
+#!/bin/bash
+
+sudo cp bin/valet /usr/local/bin
+
+echo "alias valet='/usr/local/bin/valet'" >> ~/.bashrc
+
+mkdir -p ~/.config/valet/vendor/valet
+
+cp src/init.sh 		~/.config/valet/vendor/valet
+cp src/install.sh 	~/.config/valet/vendor/valet
+cp src/remove.sh 	~/.config/valet/vendor/valet
+cp src/require.sh 	~/.config/valet/vendor/valet
+cp src/search.sh 	~/.config/valet/vendor/valet
+cp src/update.sh 	~/.config/valet/vendor/valet
+cp LICENSE.md 		~/.config/valet/vendor/valet
