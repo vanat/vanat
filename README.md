@@ -48,8 +48,8 @@ Please report all issues on the github [issue tracker][issues].
 
 ### Contributing
 
-Thank you for considering contributing to the Vanat! The contribution guide can be found in the [Vanat documentation](https://laravel.com/vanat/contributions).
+Thank you for considering contributing to the Vanat! The contribution guide can be found in the [Vanat documentation](https://vanat.github.io/docs/contributions).
 
 ### License
 
-vanat is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+vanat is licensed under the MIT License - see the [LICENSE](LICENSE.md) file for details
