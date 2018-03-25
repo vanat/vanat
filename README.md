@@ -1,6 +1,16 @@
-# Valet
+<p align="center">
+    <img width="100" height="100" src="https://raw.githubusercontent.com/vanat/brand/master/logo.png">
+    <h1>Vanat</h1>
+</p>
 
-`Valet` is a dependency management tool for Vala.
+![vala](https://img.shields.io/badge/vala-v0.36.12-yellow.svg)
+![meson](https://img.shields.io/badge/meson-v0.40-brightgreen.svg)
+![license](https://img.shields.io/github/license/mashape/apistatus.svg)
+![stable](https://img.shields.io/badge/stable-v0.1.0-blue.svg)
+
+## About Vanat
+
+`Vanat` is a tool for dependency management in Vala. It allows you to declare the libraries your project depends on and it will manage (install/update) them for you. We believe development must be an enjoyable and creative experience to be truly fulfilling.
 
 ## Building, Testing, and Installation
 You'll need the following dependencies:
@@ -29,13 +39,12 @@ Found a bug? We'd love to know about it!
 
 Please report all issues on the github [issue tracker][issues].
 
-[issues]: https://github.com/valet-dependency-manager/valet/issues
+[issues]: https://github.com/vanat/vanat/issues
 
 ## Contributing
 
-See [CONTRIBUTING.md](CONTRIBUTING.md). You may also find the arhitecture
-documentation useful ([ARCHITECTURE.md](ARCHITECTURE.md)).
+Thank you for considering contributing to the Vanat! The contribution guide can be found in the [Vanat documentation](https://laravel.com/vanat/contributions).
 
 ## License
 
-Composer is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
+vanat is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
