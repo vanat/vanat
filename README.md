@@ -4,6 +4,9 @@
     <h3 align="center">Dependency Manager for Vala</h3>
 </p>
 <p align="center">
+    <a href="https://gitter.im/vanat/vanat" target="_blank">
+        <img src="https://badges.gitter.im/vanat/vanat.svg">
+    </a>
     <img src="https://img.shields.io/badge/vala-v0.36.12-yellow.svg">
     <img src="https://img.shields.io/badge/meson-v0.40-brightgreen.svg">
     <img src="https://img.shields.io/badge/stable-v0.1.0-blue.svg">
@@ -11,8 +14,6 @@
 </p>
 
 ### About Vanat
-
-[![Join the chat at https://gitter.im/vanat/vanat](https://badges.gitter.im/vanat/vanat.svg)](https://gitter.im/vanat/vanat?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 `Vanat` is a tool for dependency management in Vala. It allows you to declare the libraries your project depends on and it will manage (install/update) them for you. We believe development must be an enjoyable and creative experience to be truly fulfilling.
 
