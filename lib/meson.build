@@ -5,11 +5,12 @@ lib_files = files(
 dependencies = [
     gobject_dep,
     glib_dep,
-    gee_dep
+    gee_dep,
+    gio_dep
 ]
 
 libraries = shared_library(
-    'valet-0.1',
+    'vanat-0.1.0',
     lib_files,
     dependencies : dependencies,
     install : true
