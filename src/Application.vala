@@ -81,8 +81,8 @@ namespace Vanat {
         private static bool is_version;
 
         /**
-         * [options description]
-         * @type {Object}
+         * Defines which options are accepted by the commandline option parser.
+         * @type {OptionEntry}
          */
         private const OptionEntry[] options = {            
             { "create-project" , 0   , 0 , OptionArg.NONE , ref is_create_project , "Create new project from a package into given directory."                                                   , null },
@@ -107,22 +107,25 @@ namespace Vanat {
         }
 
         /**
-         * [command_line description]
-         * @param  {[type]} ApplicationCommandLine command_line  [description]
-         * @return {[type]}                        [description]
+         * The command_line signal is issued immediately after the object 
+         * is created to process the typed arguments.
+         * 
+         * @param  {@code ApplicationCommandLine} command_line
+         * @return {@code int}
          */
         public override int command_line (GLib.ApplicationCommandLine command_line) {
-            //
+            // We have to make an extra copy of the array, since .parse assumes
+            // that it can remove strings from the array without freeing them.
             string[] args = command_line.get_arguments ();
             string*[] _args = new string[args.length];
 
-            //
             for (int i = 0; i < args.length; i++) {
                 _args[i] = args[i];
             }
 
             try {
-                // Defines which options are accepted by the command line option parser.
+                // Structure that will define which options are supported
+                // by the command line options parser.
                 var option_context = new OptionContext ("- Dependency Manager for Vala");
                 
                 // Enables or disables automatic generation of `--help` output.
@@ -140,9 +143,22 @@ namespace Vanat {
             } catch (OptionError e) {
                 command_line.print (_("Error: %s") + "\n", e.message);
                 command_line.print (_("Run '%s --help' to see a full list of available command line options.") + "\n", args[0]);
-                return 1;
+                return 0;
             }
 
+            // Validate the option entered by the user
+            this.typed_option ();
+
+            return 0;
+        }
+
+        /**
+         * Responsible for performing the action depending
+         * on the option entered by the user.
+         * 
+         * @return {@code void}
+         */
+        private void typed_option () {
             if (is_create_project) {
                 string s = "is_create_project";
                 stderr.printf (@"$s\n");
@@ -176,9 +192,7 @@ namespace Vanat {
             if (is_version) {
                 string s = "is_version";
                 stderr.printf (@"$s\n");
-            }            
-
-            return 1;
+            }
         }
     }
 }
