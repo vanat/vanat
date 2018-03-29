@@ -21,6 +21,9 @@
  * SOFTWARE.
  */
 
+using Vanat.Utils;
+using Vanat.Lib.Commands;
+
 namespace Vanat {
 
     /**
@@ -114,9 +117,17 @@ namespace Vanat {
          * @return {@code int}
          */
         public override int command_line (GLib.ApplicationCommandLine command_line) {
+            // Gets the arguments entered by the user
+            string[] args = command_line.get_arguments ();
+
+            // If the user does not enter any arguments, the message is displayed.
+            if (args.length < 2) {
+                ConsoleUtil.info ("Run '" + args[0] + " --help' to see a full list of available command line options.");
+                return 0;
+            }
+
             // We have to make an extra copy of the array, since .parse assumes
             // that it can remove strings from the array without freeing them.
-            string[] args = command_line.get_arguments ();
             string*[] _args = new string[args.length];
 
             for (int i = 0; i < args.length; i++) {
@@ -126,7 +137,7 @@ namespace Vanat {
             try {
                 // Structure that will define which options are supported
                 // by the command line options parser.
-                var option_context = new OptionContext ("- Dependency Manager for Vala");
+                var option_context = new OptionContext ();
                 
                 // Enables or disables automatic generation of `--help` output.
                 option_context.set_help_enabled (true); 
@@ -141,14 +152,13 @@ namespace Vanat {
                 unowned string[] tmp = _args;
                 option_context.parse (ref tmp);
             } catch (OptionError e) {
-                command_line.print (_("Error: %s") + "\n", e.message);
-                command_line.print (_("Run '%s --help' to see a full list of available command line options.") + "\n", args[0]);
+                ConsoleUtil.error ("Error: " + e.message);
+                ConsoleUtil.info ("Run '" + args[0] + " --help' to see a full list of available command line options.");
                 return 0;
             }
 
             // Validate the option entered by the user
             this.typed_option ();
-
             return 0;
         }
 
@@ -160,38 +170,31 @@ namespace Vanat {
          */
         private void typed_option () {
             if (is_create_project) {
-                string s = "is_create_project";
-                stderr.printf (@"$s\n");
+               CreateProjectCommand.start_process ();
             }
 
             if (is_init) {
-               string s = "is_init";
-                stderr.printf (@"$s\n");
+               InitCommand.start_process ();
             }
 
             if (is_install) {
-                string s = "is_install";
-                stderr.printf (@"$s\n");
+              InstallCommand.start_process (); 
             }
 
             if (is_update) {
-                string s = "is_update";
-                stderr.printf (@"$s\n");
+               UpdateCommand.start_process ();
             }
 
             if (is_remove) {
-                string s = "is_remove";
-                stderr.printf (@"$s\n");
+               RemoveCommand.start_process ();
             }
 
             if (is_help) {
-                string s = "is_help";
-                stderr.printf (@"$s\n");
+               HelpCommand.start_process ();
             }
 
             if (is_version) {
-                string s = "is_version";
-                stderr.printf (@"$s\n");
+               VersionCommand.start_process ();
             }
         }
     }

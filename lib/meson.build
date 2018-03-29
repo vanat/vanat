@@ -1,5 +1,11 @@
 lib_files = files(
-    
+    'commands/CreateProjectCommand.vala',
+    'commands/HelpCommand.vala',
+    'commands/InitCommand.vala',
+    'commands/InstallCommand.vala',
+    'commands/RemoveCommand.vala',
+    'commands/UpdateCommand.vala',
+    'commands/VersionCommand.vala'
 )
 
 dependencies = [
