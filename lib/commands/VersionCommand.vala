@@ -39,13 +39,11 @@ namespace Vanat.Library.Commands {
          * and sets the default exit folder.
          */
         public VersionCommand () {
-           /* LinkedHashMap<string, string> msg = new LinkedHashMap<string, string>();
+            LinkedHashMap<string, string> msg = new LinkedHashMap<string, string>();
             msg.set("green", "Vanat");
             msg.set("white", "version");
-            msg.set("yellow", "0.1.0");
-            msg.set("white", "2018-03-30");
-            msg.set("white", "2018-03-30");               
-            ConsoleUtil.write_custom_color(msg);*/
+            msg.set("yellow", "0.1.0");              
+            ConsoleUtil.write_custom_color(msg);
 
             //ConsoleUtil.info ("Vanat version 0.1.0 2018-03-30 02:36:34");
         }

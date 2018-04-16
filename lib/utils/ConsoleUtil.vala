@@ -71,79 +71,14 @@ namespace Vanat.Library.Utils {
          * 
          * @param  {@code string} s
          * @return {@code void}
-         * /
+         */
         public static void write_custom_color (LinkedHashMap<string, string> list) {
-            string text_to_be_printed = custom_color(list);
-            stderr.printf (@"$text_to_be_printed\n");
-        }
-
-        /**
-         * Custom text color
-         *
-         * Escape sequence - Foreground colors
-         * \x1b[30m    Black
-         * \x1b[31m    Red
-         * \x1b[32m    Green
-         * \x1b[33m    Yellow
-         * \x1b[34m    Blue
-         * \x1b[35m    Magenta
-         * \x1b[36m    Cyan
-         * \x1b[37m    White
-         * \x1b[39m    Default(foreground color at startup)
-         *
-         * Exemple:
-         * > ConsoleUtil.custom_color();
-         * 
-         * 
-         * @param  {@code string} s
-         * @return {@code void}
-         * /
-        private static string custom_color (LinkedHashMap<string, string> list) {
-            string text_temp = "";
-
-            foreach (var item in list.entries) {
-                switch (item.key) {
-                    case "black":
-                        var t = item.value;
-                        text_temp = text_temp.concat(@"\x1b[30m$t\x1b[0m").concat(" ");
-                        break;
-                    case "red":
-                        var t = item.value;
-                        text_temp = text_temp.concat(@"\x1b[31m$t\x1b[0m").concat(" ");
-                        break;
-                    case "green":
-                        var t = item.value;
-                        text_temp = text_temp.concat(@"\x1b[32m$t\x1b[0m").concat(" ");
-                        break;
-                    case "yellow":
-                        var t = item.value;
-                        text_temp = text_temp.concat(@"\x1b[33m$t\x1b[0m").concat(" ");
-                        break;
-                    case "blue":
-                        var t = item.value;
-                        text_temp = text_temp.concat(@"\x1b[34m$t\x1b[0m").concat(" ");
-                        break;
-                    case "magenta":
-                        var t = item.value;
-                        text_temp = text_temp.concat(@"\x1b[35m$t\x1b[0m").concat(" ");
-                        break;
-                    case "cyan":
-                        var t = item.value;
-                        text_temp = text_temp.concat(@"\x1b[36m$t\x1b[0m").concat(" ");
-                        break;
-                    case "white":
-                        var t = item.value;
-                        text_temp = text_temp.concat(@"\x1b[37m$t\x1b[0m").concat(" ");
-                        break;
-                    default:
-                        var t = item.value;
-                        text_temp = text_temp.concat(@"\x1b[39m$t\x1b[0m").concat(" ");
-                        break;
-                }
+            foreach (string key in list.keys) {
+                string text_to_be_printed =  TextColorUtil.custom_color (key, list.get(key));
+                stderr.printf ("%s" , text_to_be_printed);                
             }
 
-            return text_temp;
+            stderr.printf("\n");
         }
-        */
     }
 }
