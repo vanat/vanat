@@ -21,7 +21,7 @@
  * SOFTWARE.
  */
 
-namespace Vanat.Lib.Commands {
+namespace Vanat.Library.Commands {
 
     /**
      * The {@code UpdateCommand} class

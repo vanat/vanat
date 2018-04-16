@@ -21,7 +21,10 @@
  * SOFTWARE.
  */
 
-namespace Vanat.Lib.Commands {
+using Vanat.Library.Utils;
+using Vanat.Library.Collections;
+
+namespace Vanat.Library.Commands {
 
     /**
      * The {@code VersionCommand} class
@@ -30,14 +33,30 @@ namespace Vanat.Lib.Commands {
      * @since 0.1.0
      */
     public class VersionCommand {
+
+        /**
+         * Constructs a new {@code VersionCommand} object 
+         * and sets the default exit folder.
+         */
+        public VersionCommand () {
+           /* LinkedHashMap<string, string> msg = new LinkedHashMap<string, string>();
+            msg.set("green", "Vanat");
+            msg.set("white", "version");
+            msg.set("yellow", "0.1.0");
+            msg.set("white", "2018-03-30");
+            msg.set("white", "2018-03-30");               
+            ConsoleUtil.write_custom_color(msg);*/
+
+            //ConsoleUtil.info ("Vanat version 0.1.0 2018-03-30 02:36:34");
+        }
      
         /**
          * [start_process description]
          * 
          * @return {[type]} [description]
          */
-        public static void start_process () {
-
+        public static VersionCommand start_process () {
+            return new VersionCommand ();
         }
     }
 }
