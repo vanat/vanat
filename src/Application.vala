@@ -21,8 +21,8 @@
  * SOFTWARE.
  */
 
-using Vanat.Utils;
-using Vanat.Lib.Commands;
+using Vanat.Library.Utils;
+using Vanat.Library.Commands;
 
 namespace Vanat {
 
@@ -112,7 +112,9 @@ namespace Vanat {
         /**
          * The command_line signal is issued immediately after the object 
          * is created to process the typed arguments.
-         * 
+         *
+         * @see Vanat.Library.Commands.ConsoleUtil#error
+         * @see Vanat.Library.Commands.ConsoleUtil#info
          * @param  {@code ApplicationCommandLine} command_line
          * @return {@code int}
          */
@@ -140,7 +142,7 @@ namespace Vanat {
                 var option_context = new OptionContext ();
                 
                 // Enables or disables automatic generation of `--help` output.
-                option_context.set_help_enabled (true); 
+                option_context.set_help_enabled (false); 
 
                 // A convenience function which creates a main group.
                 option_context.add_main_entries (options, null);
@@ -165,7 +167,14 @@ namespace Vanat {
         /**
          * Responsible for performing the action depending
          * on the option entered by the user.
-         * 
+         *
+         * @see Vanat.Library.Commands.CreateProjectCommand
+         * @see Vanat.Library.Commands.InitCommand
+         * @see Vanat.Library.Commands.InstallCommand
+         * @see Vanat.Library.Commands.UpdateCommand
+         * @see Vanat.Library.Commands.RemoveCommand
+         * @see Vanat.Library.Commands.HelpCommand
+         * @see Vanat.Library.Commands.VersionCommand
          * @return {@code void}
          */
         private void typed_option () {
