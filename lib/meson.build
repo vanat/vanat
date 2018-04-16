@@ -1,12 +1,5 @@
 lib_files = files(
-    'collections/LinkedHashMap/KeyIterator.vala',  
-    'collections/LinkedHashMap/KeySet.vala',  
-    'collections/LinkedHashMap/LinkedHashMap.vala',
-    'collections/LinkedHashMap/MapIterator.vala',
-    'collections/LinkedHashMap/Node.vala', 
-    'collections/LinkedHashMap/ValueCollection.vala', 
-    'collections/LinkedHashMap/ValueIterator.vala', 
-    
+    'collections/LinkedHashMap.vala',   
     'commands/CreateProjectCommand.vala',
     'commands/HelpCommand.vala',
     'commands/InitCommand.vala',
@@ -14,7 +7,8 @@ lib_files = files(
     'commands/RemoveCommand.vala',
     'commands/UpdateCommand.vala',
     'commands/VersionCommand.vala',
-    'utils/ConsoleUtil.vala'
+    'utils/ConsoleUtil.vala',
+    'utils/TextColorUtil.vala'
 )
 
 dependencies = [
