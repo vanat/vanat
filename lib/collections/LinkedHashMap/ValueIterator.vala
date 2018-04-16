@@ -25,9 +25,9 @@ using Gee;
 
 namespace Vanat.Library.Collections {
 
-	/**
-	 * 
-	 */
+    /**
+     * 
+     */
     private class ValueIterator<K,V> : GLib.Object, Gee.Traversable<V>, Gee.Iterator<V> {
 
         /**
@@ -74,9 +74,9 @@ namespace Vanat.Library.Collections {
             }
         }
 
-    	/**
-    	 * 
-    	 */
+        /**
+         * 
+         */
         public LinkedHashMap<K,V> map {
             set {
                 _map = value;

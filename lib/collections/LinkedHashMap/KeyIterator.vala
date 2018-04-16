@@ -30,125 +30,125 @@ namespace Vanat.Library.Collections {
      */
     protected class KeyIterator<K,V> : GLib.Object, Gee.Iterator<K>, Gee.Traversable<K> {
 
-    	/**
-    	 * concurrent modification protection
-    	 */
-		private int _stamp;
+        /**
+         * concurrent modification protection
+         */
+        private int _stamp;
 
-		/**
-		 * 
-		 */
-		private LinkedHashMap<K,V> _map;
+        /**
+         * 
+         */
+        private LinkedHashMap<K,V> _map;
 
-		/**
-		 * 
-		 */
-		private int _index = -1;
+        /**
+         * 
+         */
+        private int _index = -1;
 
-		/**
-		 * 
-		 */
-		private weak Node<K,V> _node;
+        /**
+         * 
+         */
+        private weak Node<K,V> _node;
 
-		/**
-		 * 
-		 */
-		private weak Node<K,V> _next;
+        /**
+         * 
+         */
+        private weak Node<K,V> _next;
 
-		/**
-		 * 
-		 */
-		public LinkedHashMap<K,V> map {
-			set {
-				_map = value;
-				_stamp = _map.stamp;
-			}
-		}
+        /**
+         * 
+         */
+        public LinkedHashMap<K,V> map {
+            set {
+                _map = value;
+                _stamp = _map.stamp;
+            }
+        }
 
-		/**
-		 * 
-		 */
-		public bool read_only { 
-			get { 
-				return true; 
-			}
-		}
+        /**
+         * 
+         */
+        public bool read_only { 
+            get { 
+                return true; 
+            }
+        }
 
-		/**
-		 *
-		 */
-		public bool valid {
-			get { 
-				return _node != null; 
-			}
-		}
+        /**
+         *
+         */
+        public bool valid {
+            get { 
+                return _node != null; 
+            }
+        }
 
-		/**
-		 * Metodo abstract do Gee.Traversable
-		 * @param  {[type]} ForallFunc<G> f             [description]
-		 * @return {[type]}               [description]
-		 */
-		public bool @foreach (ForallFunc<K> f) {
-			return true;
-		}
+        /**
+         * Metodo abstract do Gee.Traversable
+         * @param  {[type]} ForallFunc<G> f             [description]
+         * @return {[type]}               [description]
+         */
+        public bool @foreach (ForallFunc<K> f) {
+            return true;
+        }
 
-		/**
-		 * [KeyIterator description]
-		 * @param {[type]} LinkedHashMap map [description]
-		 */
-		public KeyIterator (LinkedHashMap map) {
-			this.map = map;
-		}
+        /**
+         * [KeyIterator description]
+         * @param {[type]} LinkedHashMap map [description]
+         */
+        public KeyIterator (LinkedHashMap map) {
+            this.map = map;
+        }
 
-		/**
-		 * [next description]
-		 * @return {Function} [description]
-		 */
-		public bool next () {
-			assert (_stamp == _map.stamp);
-			if (!has_next ()) {
-				return false;
-			}
-			_node = _next;
-			_next = null;
-			return (_node != null);
-		}
+        /**
+         * [next description]
+         * @return {Function} [description]
+         */
+        public bool next () {
+            assert (_stamp == _map.stamp);
+            if (!has_next ()) {
+                return false;
+            }
+            _node = _next;
+            _next = null;
+            return (_node != null);
+        }
 
-		/**
-		 * [has_next description]
-		 * @return {Boolean} [description]
-		 */
-		public bool has_next () {
-			assert (_stamp == _map.stamp);
-			if (_next == null) {
-				_next = _node;
-				if (_next != null) {
-					_next = _next.next;
-				}
-				while (_next == null && _index + 1 < _map.array_size) {
-					_index++;
-					_next = _map.nodes[_index];
-				}
-			}
-			return (_next != null);
-		}
+        /**
+         * [has_next description]
+         * @return {Boolean} [description]
+         */
+        public bool has_next () {
+            assert (_stamp == _map.stamp);
+            if (_next == null) {
+                _next = _node;
+                if (_next != null) {
+                    _next = _next.next;
+                }
+                while (_next == null && _index + 1 < _map.array_size) {
+                    _index++;
+                    _next = _map.nodes[_index];
+                }
+            }
+            return (_next != null);
+        }
 
-		/**
-		 * [get description]
-		 * @return {[type]} [description]
-		 */
-		public new K? get () {
-			assert (_stamp == _map.stamp);
-			assert (_node != null);
-			return _node.key;
-		}
+        /**
+         * [get description]
+         * @return {[type]} [description]
+         */
+        public new K? get () {
+            assert (_stamp == _map.stamp);
+            assert (_node != null);
+            return _node.key;
+        }
 
-		/**
-		 * [remove description]
-		 * @return {[type]} [description]
-		 */
-		public void remove () {
-			assert_not_reached ();
-		}
+        /**
+         * [remove description]
+         * @return {[type]} [description]
+         */
+        public void remove () {
+            assert_not_reached ();
+        }
     }
 }
