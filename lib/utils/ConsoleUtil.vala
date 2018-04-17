@@ -59,7 +59,7 @@ namespace Vanat.Library.Utils {
          * @return {@code void}
          */
         public static void info (string s) {
-            stdout.printf (@"$s\n");
+            stdout.printf (@"\x1b[34m$s\x1b[0m\n");
         }
 
         /**

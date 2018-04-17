@@ -85,37 +85,37 @@ namespace Vanat.Library.Utils {
                     text_temp = text_temp.concat(@"\x1b[37m$value\x1b[0m").concat(SPACE);
                     break;
                 default:
-                    text_temp = text_temp.concat(@"\x1b[39m$value\x1b[0m").concat(SPACE);
+                    text_temp = text_temp.concat(@"$value").concat(SPACE);
                     break;
             }
 
             switch (background_color) {
                 case "black":
-                    text_temp = @"\x1b[30m$text_temp\x1b[0m";
+                    text_temp = @"\x1b[40m$text_temp\x1b[0m";
                     break;
                 case "red":
-                    text_temp = @"\x1b[31m$text_temp\x1b[0m";
+                    text_temp = @"\x1b[41m$text_temp\x1b[0m";
                     break;
                 case "green":
-                    text_temp = @"\x1b[32m$text_temp\x1b[0m";
+                    text_temp = @"\x1b[42m$text_temp\x1b[0m";
                     break;
                 case "yellow":
-                    text_temp = @"\x1b[44m$text_temp\x1b[0m";
+                    text_temp = @"\x1b[43m$text_temp\x1b[0m";
                     break;
                 case "blue":
                     text_temp = @"\x1b[44m$text_temp\x1b[0m";
                     break;
                 case "magenta":
-                    text_temp = @"\x1b[35m$text_temp\x1b[0m";
+                    text_temp = @"\x1b[45m$text_temp\x1b[0m";
                     break;
                 case "cyan":
-                    text_temp = @"\x1b[36m$text_temp\x1b[0m";
+                    text_temp = @"\x1b[46m$text_temp\x1b[0m";
                     break;
                 case "white":
-                    text_temp = @"\x1b[37m$text_temp\x1b[0m";
+                    text_temp = @"\x1b[47m$text_temp\x1b[0m";
                     break;
                 default:
-                    text_temp = @"\x1b[39m$text_temp\x1b[0m";
+                    text_temp = @"$text_temp";
                     break;
             }
 

@@ -41,23 +41,73 @@ namespace Vanat.Library.Commands {
 
             ConsoleUtil.write(StringUtil.BREAK_LINE);
             ConsoleUtil.write_custom_color("                                     ", true, false, "white", "blue");
-            ConsoleUtil.write_custom_color("Welcome to the Vanat config generator", true, false, "white", "blue");
+            ConsoleUtil.write_custom_color("Welcome to the Vanat config generator", true, false, "black", "blue");
             ConsoleUtil.write_custom_color("                                     ", true, false, "white", "blue");
             
             ConsoleUtil.write(StringUtil.BREAK_LINE);
             ConsoleUtil.write_custom_color("This command will guide you through creating your vanat.json config.", true, false);
 
             ConsoleUtil.write(StringUtil.BREAK_LINE);
+            ConsoleUtil.write("Package name (<user>/<name>): ");
+            string package = stdin.read_line ();
 
+            ConsoleUtil.write("Description: ");
+            string description = stdin.read_line ();
 
-            /*File file = File.new_for_path ("vanat.json");
-            try {
-                FileOutputStream os = file.create (FileCreateFlags.NONE);
-                os.write ("My first line\n".data);
-                stdout.printf ("Created.\n");
-            } catch (Error e) {
-                stdout.printf ("Error: %s\n", e.message);
-            }*/
+            ConsoleUtil.write("Version: ");
+            string version = stdin.read_line ();
+
+            ConsoleUtil.write("Author (user <xxxxx@email.com>): ");
+            string author = stdin.read_line ();
+
+            ConsoleUtil.write("Package Type (project or library or plugin): ");
+            string type = stdin.read_line ();
+
+            ConsoleUtil.write("License: ");
+            string license = stdin.read_line ();
+
+            string file_data_vanat_json = StringUtil.EMPTY;
+            file_data_vanat_json += "{\n";
+            
+            if (package.length > 0) {
+                file_data_vanat_json += StringUtil.format(StringUtil.SPACE, StringUtil.EMPTY, 4, true) + "\"name\": \"" + package + "\"" + StringUtil.BREAK_LINE;    
+            }
+            
+            if (description.length > 0) {
+                file_data_vanat_json += StringUtil.format(StringUtil.SPACE, StringUtil.EMPTY, 4, true) + "\"description\": \"" + description + "\"" + StringUtil.BREAK_LINE;
+            }
+
+            if (version.length > 0) {
+                file_data_vanat_json += StringUtil.format(StringUtil.SPACE, StringUtil.EMPTY, 4, true) + "\"version\": \"" + version + "\"" + StringUtil.BREAK_LINE;
+            }
+
+            if (author.length > 0) {
+                file_data_vanat_json += StringUtil.format(StringUtil.SPACE, StringUtil.EMPTY, 4, true) + "\"author\": \"" + author + "\"" + StringUtil.BREAK_LINE;
+            }
+
+            file_data_vanat_json += StringUtil.format(StringUtil.SPACE, StringUtil.EMPTY, 4, true) + "\"require\": {}";
+            file_data_vanat_json += "\n}";
+
+            ConsoleUtil.write(StringUtil.BREAK_LINE);
+            ConsoleUtil.write(file_data_vanat_json);
+            ConsoleUtil.write(StringUtil.BREAK_LINE);
+
+            ConsoleUtil.write(StringUtil.BREAK_LINE);
+            ConsoleUtil.write("Do you confirm generation [yes]? ");
+            string confirm = stdin.read_line ();
+
+            if (confirm == "yes" || confirm == "y") {
+                File file = File.new_for_path ("vanat.json");
+                try {
+                    FileOutputStream os = file.create (FileCreateFlags.NONE);
+                    os.write (file_data_vanat_json.data);
+                    ConsoleUtil.write_custom_color("File created.", true, false, "black", "cyan");
+                } catch (Error e) {
+                    ConsoleUtil.error(e.message);
+                }
+            } else {
+                ConsoleUtil.write_custom_color("Command aborted", true, false, "white", "red");
+            }
         }
 
         /**
