@@ -6,6 +6,7 @@ lib_files = files(
     'commands/InstallCommand.vala',
     'commands/RemoveCommand.vala',
     'commands/UpdateCommand.vala',
+    'commands/VanatCommand.vala',
     'commands/VersionCommand.vala',
     'utils/ConsoleUtil.vala',
     'utils/StringUtil.vala',

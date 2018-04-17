@@ -124,7 +124,7 @@ namespace Vanat {
 
             // If the user does not enter any arguments, the message is displayed.
             if (args.length < 2) {
-                ConsoleUtil.info ("Run '" + args[0] + " --help' to see a full list of available command line options.");
+                VanatCommand.start_process (args[0]);
                 return 0;
             }
 
@@ -155,6 +155,7 @@ namespace Vanat {
                 option_context.parse (ref tmp);
             } catch (OptionError e) {
                 ConsoleUtil.error ("Error: " + e.message);
+                ConsoleUtil.write (StringUtil.BREAK_LINE);
                 ConsoleUtil.info ("Run '" + args[0] + " --help' to see a full list of available command line options.");
                 return 0;
             }

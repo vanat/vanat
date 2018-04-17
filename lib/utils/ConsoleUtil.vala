@@ -45,7 +45,7 @@ namespace Vanat.Library.Utils {
          * @return {@code void}
          */
         public static void write (string s) {
-            stdout.printf (@"$s\n");
+            stdout.printf (@"$s");
         }
     
         /**
