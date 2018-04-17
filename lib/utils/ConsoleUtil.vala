@@ -109,7 +109,7 @@ namespace Vanat.Library.Utils {
          */
         public static void write_custom_color_map (LinkedHashMap<string, string> list) {
             foreach (string key in list.keys) {
-                string text_to_be_printed =  TextColorUtil.custom_color (key, list.get(key));
+                string text_to_be_printed =  TextColorUtil.custom_color (list.get(key), key);
                 stdout.printf (text_to_be_printed);                
             }
 
@@ -122,7 +122,7 @@ namespace Vanat.Library.Utils {
          * @return {[type]}        [description]
          */
         public static void write_title_custom_color (string value) {
-            string text_to_be_printed =  TextColorUtil.custom_color ("yellow", value);
+            string text_to_be_printed =  TextColorUtil.custom_color (value, "yellow");
             stdout.printf(StringUtil.BREAK_LINE + text_to_be_printed + StringUtil.BREAK_LINE);
         }
 
