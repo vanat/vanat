@@ -1,10 +1,12 @@
 lib_files = files(
     'collections/LinkedHashMap.vala',   
+    'commands/AboutCommand.vala',
     'commands/CreateProjectCommand.vala',
     'commands/HelpCommand.vala',
     'commands/InitCommand.vala',
     'commands/InstallCommand.vala',
     'commands/RemoveCommand.vala',
+    'commands/RequireCommand.vala',
     'commands/UpdateCommand.vala',
     'commands/VanatCommand.vala',
     'commands/VersionCommand.vala',

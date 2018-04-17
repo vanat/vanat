@@ -35,70 +35,6 @@ namespace Vanat {
     public class Application : GLib.Application {
 
         /**
-         * This property will be true if the option entered 
-         * by user is to create a new project.
-         * Variable static of type {@code bool} as declared.
-         */
-        private static bool is_create_project;
-
-        /**
-         * This property is true if the option entered 
-         * by the user is `init`.
-         * Variable static of type {@code bool} as declared.
-         */
-        private static bool is_init;
-
-        /**
-         * This property is true if the option entered 
-         * by the user is `install`.
-         * Variable static of type {@code bool} as declared.
-         */
-        private static bool is_install;      
-
-        /**
-         * This property is true if the option entered 
-         * by the user is `update`.
-         * Variable static of type {@code bool} as declared.
-         */
-        private static bool is_update;
-
-        /**
-         * This property is true if the option entered 
-         * by the user is `remove`.
-         * Variable static of type {@code bool} as declared.
-         */
-        private static bool is_remove;
-
-        /**
-         * This property is true if the option entered 
-         * by the user is `help`.
-         * Variable static of type {@code bool} as declared.
-         */
-        private static bool is_help;
-
-        /**
-         * This property is true if the option entered 
-         * by the user is `version`.
-         * Variable static of type {@code bool} as declared.
-         */
-        private static bool is_version;
-
-        /**
-         * Defines which options are accepted by the commandline option parser.
-         * @type {OptionEntry}
-         */
-        private const OptionEntry[] options = {            
-            { "create-project" , 0   , 0 , OptionArg.NONE , ref is_create_project , "Create new project from a package into given directory."                                                   , null },
-            { "init"           , 0   , 0 , OptionArg.NONE , ref is_init           , "Creates a basic vanat.json file in current directory."                                                     , null },
-            { "install"        , 0   , 0 , OptionArg.NONE , ref is_install        , "Installs the project dependencies from the vanat.lock file if present, or falls back on the vanat.json."   , null },
-            { "update"         , 0   , 0 , OptionArg.NONE , ref is_update         , "Updates your dependencies to the latest version according to vanat.json, and updates the vanat.lock file." , null },
-            { "remove"         , 0   , 0 , OptionArg.NONE , ref is_remove         , "Removes a package from the require."                                                                       , null },
-            { "help"           , 'h' , 0 , OptionArg.NONE , ref is_help           , "Display this help message"                                                                                 , null },
-            { "version"        , 'v' , 0 , OptionArg.NONE , ref is_version        , "Display this application version"                                                                          , null },
-            { null }
-        };
-
-        /**
          * Constructs a new {@code Application} object 
          * and sets the default exit folder.
          */
@@ -127,41 +63,8 @@ namespace Vanat {
                 VanatCommand.start_process (args[0]);
                 return 0;
             }
-
-            // We have to make an extra copy of the array, since .parse assumes
-            // that it can remove strings from the array without freeing them.
-            string*[] _args = new string[args.length];
-
-            for (int i = 0; i < args.length; i++) {
-                _args[i] = args[i];
-            }
-
-            try {
-                // Structure that will define which options are supported
-                // by the command line options parser.
-                var option_context = new OptionContext ();
-                
-                // Enables or disables automatic generation of `--help` output.
-                option_context.set_help_enabled (false); 
-
-                // A convenience function which creates a main group.
-                option_context.add_main_entries (options, null);
-
-                // Parses the command line arguments, recognizing options 
-                // which have been added to this. If the parsing is successful, 
-                // any parsed arguments are removed from the array and argv.length
-                // and argv are updated accordingly
-                unowned string[] tmp = _args;
-                option_context.parse (ref tmp);
-            } catch (OptionError e) {
-                ConsoleUtil.error ("Error: " + e.message);
-                ConsoleUtil.write (StringUtil.BREAK_LINE);
-                ConsoleUtil.info ("Run '" + args[0] + " --help' to see a full list of available command line options.");
-                return 0;
-            }
-
-            // Validate the option entered by the user
-            this.typed_option ();
+               
+            this.typed_option (args[1]);
             return 0;
         }
 
@@ -178,33 +81,41 @@ namespace Vanat {
          * @see Vanat.Library.Commands.VersionCommand
          * @return {@code void}
          */
-        private void typed_option () {
-            if (is_create_project) {
-                CreateProjectCommand.start_process ();
-            }
-
-            if (is_init) {
-                InitCommand.start_process ();
-            }
-
-            if (is_install) {
-                InstallCommand.start_process (); 
-            }
-
-            if (is_update) {
-                UpdateCommand.start_process ();
-            }
-
-            if (is_remove) {
-                RemoveCommand.start_process ();
-            }
-
-            if (is_help) {
-                HelpCommand.start_process ();
-            }
-
-            if (is_version) {
-                VersionCommand.start_process ();
+        private void typed_option (string arg) {
+            switch (arg) {
+                case "about":
+                    AboutCommand.start_process ();
+                    break;
+                case "create-project":
+                    CreateProjectCommand.start_process ();
+                    break;
+                case "init":
+                    InitCommand.start_process ();
+                    break;
+                case "install":
+                    InstallCommand.start_process (); 
+                    break;
+                case "update":
+                    UpdateCommand.start_process ();
+                    break;
+                case "remove":
+                    RemoveCommand.start_process ();
+                    break;
+                case "require":
+                    RequireCommand.start_process ();
+                    break;
+                case "-h":
+                case "--help":
+                case "list":
+                    HelpCommand.start_process ();
+                    break;
+                case "-v":
+                case "--version":
+                    VersionCommand.start_process ();
+                    break;
+                default:
+                    HelpCommand.start_process ();
+                    break;
             }
         }
     }
