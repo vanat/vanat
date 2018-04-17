@@ -21,6 +21,9 @@
  * SOFTWARE.
  */
 
+using Vanat.Library.Utils;
+using Vanat.Library.Collections;
+
 namespace Vanat.Library.Commands {
 
     /**
@@ -36,8 +39,50 @@ namespace Vanat.Library.Commands {
          * 
          * @return {[type]} [description]
          */
-        public static void start_process () {
+        public HelpCommand () {
+            LinkedHashMap<string, string> options = new LinkedHashMap<string, string>();
+            options.set("-h, --help", "Display this help message");
+            options.set("-v, --version", "Display this application version");
 
+            LinkedHashMap<string, string> available_commands = new LinkedHashMap<string, string>();
+            available_commands.set("--create-project", "Create new project from a package into given directory.");
+            available_commands.set("--init", "Creates a basic vanat.json file in current directory.");
+            available_commands.set("--install", "Installs the project dependencies from the vanat.lock file if present, or falls back on the vanat.json.");
+            available_commands.set("--update", "Updates your dependencies to the latest version according to vanat.json, and updates the vanat.lock file.");
+            available_commands.set("--remove", "Removes a package from the require.");
+
+            ConsoleUtil.write_custom_color("white","°°°°°°°°°°°°|\\", true);
+            ConsoleUtil.write_custom_color("white","°°°°°°°°°°°°|_\\", true);
+            ConsoleUtil.write_custom_color("white","°°°°°°°°°°°°|__\\", true);
+            ConsoleUtil.write_custom_color("white","°°°°°°°°°°°°|___\\", true);
+            ConsoleUtil.write_custom_color("white","°°°°°°°°°°°°|____\\", true);
+            ConsoleUtil.write_custom_color("white","°°°°°°°°°°°°|_____\\°°°°°°", true);
+            ConsoleUtil.write_custom_color("white","°°°°°°°°°°°°|______\\°°°°°°", true);
+            ConsoleUtil.write_custom_color("white","°°°°°°______|_______________", true);
+            ConsoleUtil.write_custom_color("white","~~~~\\____________________/~~~~", true);
+            ConsoleUtil.write_custom_color("white",",.-~*´¨¯¨`*·~-.¸,.-~*´¨¯¨`*·~-", true);
+            ConsoleUtil.write_custom_color("white",".¸,.-~*´¨¯¨`*·~-.¸,.-~*´¨¯¨`*·~-", true);
+
+            ConsoleUtil.write(StringUtil.EMPTY);
+            VersionCommand.start_process ();
+
+            ConsoleUtil.write_title_custom_color("Usage:");
+            ConsoleUtil.write_custom_color("white", "command [options] [arguments]", true, true);
+
+            ConsoleUtil.write_title_custom_color("Options:");
+            ConsoleUtil.write_options_custom_color(options);
+
+            ConsoleUtil.write_title_custom_color("Available commands:");
+            ConsoleUtil.write_options_custom_color(available_commands);
+        }
+
+        /**
+         * [start_process description]
+         * 
+         * @return {[type]} [description]
+         */
+        public static HelpCommand start_process () {
+            return new HelpCommand ();
         }
     }
 }

@@ -33,7 +33,21 @@ namespace Vanat.Library.Utils {
      * @since 0.1.0
      */
     public class ConsoleUtil {
-     
+
+        /**
+         * Responsible for printing on the console of the information
+         * message passed by the parameter.
+         *
+         * Exemple:
+         * > ConsoleUtil.info("test info");
+         * 
+         * @param  {@code string} s
+         * @return {@code void}
+         */
+        public static void write (string s) {
+            stdout.printf (@"$s\n");
+        }
+    
         /**
          * Responsible for printing on the console of the information
          * message passed by the parameter.
@@ -45,7 +59,7 @@ namespace Vanat.Library.Utils {
          * @return {@code void}
          */
         public static void info (string s) {
-            stderr.printf (@"$s\n");
+            stdout.printf (@"$s\n");
         }
 
         /**
@@ -63,22 +77,74 @@ namespace Vanat.Library.Utils {
         }
 
         /**
-         * Responsible for printing on the console of the information
-         * message passed by the parameter.
-         *
-         * Exemple:
-         * > ConsoleUtil.write_custom_color("test info");
-         * 
-         * @param  {@code string} s
-         * @return {@code void}
+         * [write_custom_color description]
+         * @param  {[type]}  string key           [description]
+         * @param  {[type]}  string value         [description]
+         * @param  {Boolean} bool   break_line    [description]
+         * @param  {Boolean} bool   space_init    [description]
+         * @return {[type]}         [description]
          */
-        public static void write_custom_color (LinkedHashMap<string, string> list) {
+        public static void write_custom_color (string key, string value, bool break_line = false, bool space_init = false) {
+            string text_to_be_printed =  TextColorUtil.custom_color (key, value);
+
+            if (break_line) {
+                if (space_init) {
+                    stdout.printf("  " + text_to_be_printed + "\n");
+                } else {
+                    stdout.printf(text_to_be_printed + "\n");
+                }
+            }else {
+                if (space_init) {
+                    stdout.printf("  " + text_to_be_printed);
+                } else {
+                    stdout.printf(text_to_be_printed);
+                }    
+            }            
+        }
+
+        /**
+         * [write_custom_color_map description]
+         * @param  {[type]} LinkedHashMap<string, string>       list [description]
+         * @return {[type]}                       [description]
+         */
+        public static void write_custom_color_map (LinkedHashMap<string, string> list) {
             foreach (string key in list.keys) {
                 string text_to_be_printed =  TextColorUtil.custom_color (key, list.get(key));
-                stderr.printf ("%s" , text_to_be_printed);                
+                stdout.printf (text_to_be_printed);                
             }
 
-            stderr.printf("\n");
+            stdout.printf(StringUtil.BREAK_LINE);
+        }
+
+        /**
+         * [write_title_custom_color description]
+         * @param  {[type]} string value         [description]
+         * @return {[type]}        [description]
+         */
+        public static void write_title_custom_color (string value) {
+            string text_to_be_printed =  TextColorUtil.custom_color ("yellow", value);
+            stdout.printf(StringUtil.BREAK_LINE + text_to_be_printed + StringUtil.BREAK_LINE);
+        }
+
+        /**
+         * [write_option_custom_color description]
+         * @param  {[type]} LinkedHashMap<K,V> list          [description]
+         * @return {[type]}                    [description]
+         */
+        public static void write_options_custom_color (LinkedHashMap<string,string> list) {
+
+            int max_value_length = 0;
+
+            foreach (string option in list.keys) {
+                if(option.length > max_value_length) {
+                    max_value_length = option.length;
+                }
+            }
+
+            foreach (string option in list.keys) {
+                write_custom_color("green", StringUtil.format(StringUtil.SPACE, option, max_value_length), false, true);
+                write_custom_color("white", list.get(option), true, false);
+            }
         }
     }
 }

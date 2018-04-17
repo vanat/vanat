@@ -93,8 +93,8 @@ namespace Vanat {
             { "install"        , 0   , 0 , OptionArg.NONE , ref is_install        , "Installs the project dependencies from the vanat.lock file if present, or falls back on the vanat.json."   , null },
             { "update"         , 0   , 0 , OptionArg.NONE , ref is_update         , "Updates your dependencies to the latest version according to vanat.json, and updates the vanat.lock file." , null },
             { "remove"         , 0   , 0 , OptionArg.NONE , ref is_remove         , "Removes a package from the require."                                                                       , null },
-            { "help"           , 'h' , 0 , OptionArg.NONE , ref is_help           , "Display version number"                                                                                    , null },
-            { "version"        , 'v' , 0 , OptionArg.NONE , ref is_version        , "Display version number"                                                                                    , null },
+            { "help"           , 'h' , 0 , OptionArg.NONE , ref is_help           , "Display this help message"                                                                                 , null },
+            { "version"        , 'v' , 0 , OptionArg.NONE , ref is_version        , "Display this application version"                                                                          , null },
             { null }
         };
 
@@ -179,31 +179,31 @@ namespace Vanat {
          */
         private void typed_option () {
             if (is_create_project) {
-               CreateProjectCommand.start_process ();
+                CreateProjectCommand.start_process ();
             }
 
             if (is_init) {
-               InitCommand.start_process ();
+                InitCommand.start_process ();
             }
 
             if (is_install) {
-              InstallCommand.start_process (); 
+                InstallCommand.start_process (); 
             }
 
             if (is_update) {
-               UpdateCommand.start_process ();
+                UpdateCommand.start_process ();
             }
 
             if (is_remove) {
-               RemoveCommand.start_process ();
+                RemoveCommand.start_process ();
             }
 
             if (is_help) {
-               HelpCommand.start_process ();
+                HelpCommand.start_process ();
             }
 
             if (is_version) {
-               VersionCommand.start_process ();
+                VersionCommand.start_process ();
             }
         }
     }

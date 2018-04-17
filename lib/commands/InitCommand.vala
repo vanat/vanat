@@ -21,6 +21,8 @@
  * SOFTWARE.
  */
 
+using Vanat.Library.Utils;
+
 namespace Vanat.Library.Commands {
 
     /**
@@ -32,12 +34,20 @@ namespace Vanat.Library.Commands {
     public class InitCommand {
      
         /**
+         * Constructs a new {@code InitCommand} object 
+         * and sets the default exit folder.
+         */
+        public InitCommand () {
+           ConsoleUtil.write_title_custom_color("InitCommand");
+        }
+
+        /**
          * [start_process description]
          * 
          * @return {[type]} [description]
          */
-        public static void start_process () {
-
+        public static InitCommand start_process () {
+            return new InitCommand ();
         }
     }
 }

@@ -21,6 +21,8 @@
  * SOFTWARE.
  */
 
+using Vanat.Library.Utils;
+
 namespace Vanat.Library.Commands {
 
     /**
@@ -32,12 +34,20 @@ namespace Vanat.Library.Commands {
     public class RemoveCommand {
      
         /**
+         * Constructs a new {@code RemoveCommand} object 
+         * and sets the default exit folder.
+         */
+        public RemoveCommand () {
+           ConsoleUtil.write_title_custom_color("RemoveCommand");
+        }
+
+        /**
          * [start_process description]
          * 
          * @return {[type]} [description]
          */
-        public static void start_process () {
-
+        public static RemoveCommand start_process () {
+            return new RemoveCommand ();
         }
     }
 }

@@ -8,6 +8,7 @@ lib_files = files(
     'commands/UpdateCommand.vala',
     'commands/VersionCommand.vala',
     'utils/ConsoleUtil.vala',
+    'utils/StringUtil.vala',
     'utils/TextColorUtil.vala'
 )
 

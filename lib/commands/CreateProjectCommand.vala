@@ -21,6 +21,8 @@
  * SOFTWARE.
  */
 
+using Vanat.Library.Utils;
+
 namespace Vanat.Library.Commands {
 
     /**
@@ -30,14 +32,22 @@ namespace Vanat.Library.Commands {
      * @since 0.1.0
      */
     public class CreateProjectCommand {
-     
+
+        /**
+         * Constructs a new {@code VersionCommand} object 
+         * and sets the default exit folder.
+         */
+        public CreateProjectCommand () {
+           ConsoleUtil.write_title_custom_color("CreateProjectCommand");
+        }
+
         /**
          * [start_process description]
          * 
          * @return {[type]} [description]
          */
-        public static void start_process () {
-
+        public static CreateProjectCommand start_process () {
+            return new CreateProjectCommand ();
         }
     }
 }

@@ -21,6 +21,8 @@
  * SOFTWARE.
  */
 
+using Vanat.Library.Utils;
+
 namespace Vanat.Library.Commands {
 
     /**
@@ -32,12 +34,20 @@ namespace Vanat.Library.Commands {
     public class InstallCommand {
      
         /**
+         * Constructs a new {@code InstallCommand} object 
+         * and sets the default exit folder.
+         */
+        public InstallCommand () {
+            ConsoleUtil.write_title_custom_color("InstallCommand");
+        }
+
+        /**
          * [start_process description]
          * 
          * @return {[type]} [description]
          */
-        public static void start_process () {
-
+        public static InstallCommand start_process () {
+            return new InstallCommand ();
         }
     }
 }

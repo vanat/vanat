@@ -21,6 +21,8 @@
  * SOFTWARE.
  */
 
+using Vanat.Library.Utils;
+
 namespace Vanat.Library.Commands {
 
     /**
@@ -32,12 +34,20 @@ namespace Vanat.Library.Commands {
     public class UpdateCommand {
      
         /**
+         * Constructs a new {@code UpdateCommand} object 
+         * and sets the default exit folder.
+         */
+        public UpdateCommand () {
+            ConsoleUtil.write_title_custom_color("UpdateCommand");
+        }
+
+        /**
          * [start_process description]
          * 
          * @return {[type]} [description]
          */
-        public static void start_process () {
-
+        public static UpdateCommand start_process () {
+            return new UpdateCommand ();
         }
     }
 }
