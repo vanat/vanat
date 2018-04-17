@@ -66,6 +66,35 @@ namespace Vanat.Library.Commands {
             ConsoleUtil.write("License: ");
             string license = stdin.read_line ();
 
+            string vanat_json = mount_file_data_vanat_json (package, description, version, author, type, license);
+            ConsoleUtil.write(StringUtil.BREAK_LINE);
+            
+            ConsoleUtil.write(vanat_json);
+            ConsoleUtil.write(StringUtil.BREAK_LINE);
+
+            ConsoleUtil.write(StringUtil.BREAK_LINE);
+            ConsoleUtil.write("Do you confirm generation [yes]? ");
+            string confirm = stdin.read_line ();
+
+            if (confirm == "yes" || confirm == "y") {
+                File file = File.new_for_path ("vanat.json");
+                try {
+                    FileOutputStream os = file.create (FileCreateFlags.NONE);
+                    os.write (vanat_json.data);
+                    ConsoleUtil.write_custom_color("File created.", true, false, "black", "cyan");
+                } catch (Error e) {
+                    ConsoleUtil.error(e.message);
+                }
+            } else {
+                ConsoleUtil.write_custom_color("Command aborted", true, false, "white", "red");
+            }
+        }
+
+        /**
+         * [mount_file_data_vanat_json description]
+         * @return {[type]} [description]
+         */
+        private string mount_file_data_vanat_json (string package, string description, string version, string author, string type, string license) {
             string file_data_vanat_json = StringUtil.EMPTY;
             file_data_vanat_json += "{\n";
             
@@ -88,26 +117,7 @@ namespace Vanat.Library.Commands {
             file_data_vanat_json += StringUtil.format(StringUtil.SPACE, StringUtil.EMPTY, 4, true) + "\"require\": {}";
             file_data_vanat_json += "\n}";
 
-            ConsoleUtil.write(StringUtil.BREAK_LINE);
-            ConsoleUtil.write(file_data_vanat_json);
-            ConsoleUtil.write(StringUtil.BREAK_LINE);
-
-            ConsoleUtil.write(StringUtil.BREAK_LINE);
-            ConsoleUtil.write("Do you confirm generation [yes]? ");
-            string confirm = stdin.read_line ();
-
-            if (confirm == "yes" || confirm == "y") {
-                File file = File.new_for_path ("vanat.json");
-                try {
-                    FileOutputStream os = file.create (FileCreateFlags.NONE);
-                    os.write (file_data_vanat_json.data);
-                    ConsoleUtil.write_custom_color("File created.", true, false, "black", "cyan");
-                } catch (Error e) {
-                    ConsoleUtil.error(e.message);
-                }
-            } else {
-                ConsoleUtil.write_custom_color("Command aborted", true, false, "white", "red");
-            }
+            return file_data_vanat_json;
         }
 
         /**
