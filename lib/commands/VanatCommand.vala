@@ -40,17 +40,17 @@ namespace Vanat.Library.Commands {
          * @return {[type]} [description]
          */
         public VanatCommand (string arg = "") {
-            ConsoleUtil.write_custom_color("white","°°°°°°°°°°°°|\\", true);
-            ConsoleUtil.write_custom_color("white","°°°°°°°°°°°°|_\\", true);
-            ConsoleUtil.write_custom_color("white","°°°°°°°°°°°°|__\\", true);
-            ConsoleUtil.write_custom_color("white","°°°°°°°°°°°°|___\\", true);
-            ConsoleUtil.write_custom_color("white","°°°°°°°°°°°°|____\\", true);
-            ConsoleUtil.write_custom_color("white","°°°°°°°°°°°°|_____\\°°°°°°", true);
-            ConsoleUtil.write_custom_color("white","°°°°°°°°°°°°|______\\°°°°°°", true);
-            ConsoleUtil.write_custom_color("white","°°°°°°______|_______________", true);
-            ConsoleUtil.write_custom_color("white","~~~~\\____________________/~~~~", true);
-            ConsoleUtil.write_custom_color("white",",.-~*´¨¯¨`*·~-.¸,.-~*´¨¯¨`*·~-", true);
-            ConsoleUtil.write_custom_color("white",".¸,.-~*´¨¯¨`*·~-.¸,.-~*´¨¯¨`*·~-", true);
+            ConsoleUtil.write_custom_color("°°°°°°°°°°°°|\\", true, false, "white");
+            ConsoleUtil.write_custom_color("°°°°°°°°°°°°|_\\", true, false, "white");
+            ConsoleUtil.write_custom_color("°°°°°°°°°°°°|__\\", true, false, "white");
+            ConsoleUtil.write_custom_color("°°°°°°°°°°°°|___\\", true, false, "white");
+            ConsoleUtil.write_custom_color("°°°°°°°°°°°°|____\\", true, false, "white");
+            ConsoleUtil.write_custom_color("°°°°°°°°°°°°|_____\\°°°°°°", true, false, "white");
+            ConsoleUtil.write_custom_color("°°°°°°°°°°°°|______\\°°°°°°", true, false, "white");
+            ConsoleUtil.write_custom_color("°°°°°°______|_______________", true, false, "white");
+            ConsoleUtil.write_custom_color("~~~~\\____________________/~~~~", true, false, "white");
+            ConsoleUtil.write_custom_color(",.-~*´¨¯¨`*·~-.¸,.-~*´¨¯¨`*·~-", true, false, "white");
+            ConsoleUtil.write_custom_color(".¸,.-~*´¨¯¨`*·~-.¸,.-~*´¨¯¨`*·~-", true, false, "white");
 
             ConsoleUtil.write(StringUtil.BREAK_LINE);
             VersionCommand.start_process ();

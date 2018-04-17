@@ -38,7 +38,26 @@ namespace Vanat.Library.Commands {
          * and sets the default exit folder.
          */
         public InitCommand () {
-           ConsoleUtil.write_title_custom_color("InitCommand");
+
+            ConsoleUtil.write(StringUtil.BREAK_LINE);
+            ConsoleUtil.write_custom_color("                                     ", true, false, "white", "blue");
+            ConsoleUtil.write_custom_color("Welcome to the Vanat config generator", true, false, "white", "blue");
+            ConsoleUtil.write_custom_color("                                     ", true, false, "white", "blue");
+            
+            ConsoleUtil.write(StringUtil.BREAK_LINE);
+            ConsoleUtil.write_custom_color("This command will guide you through creating your vanat.json config.", true, false);
+
+            ConsoleUtil.write(StringUtil.BREAK_LINE);
+
+
+            /*File file = File.new_for_path ("vanat.json");
+            try {
+                FileOutputStream os = file.create (FileCreateFlags.NONE);
+                os.write ("My first line\n".data);
+                stdout.printf ("Created.\n");
+            } catch (Error e) {
+                stdout.printf ("Error: %s\n", e.message);
+            }*/
         }
 
         /**

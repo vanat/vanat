@@ -84,8 +84,8 @@ namespace Vanat.Library.Utils {
          * @param  {Boolean} bool   space_init    [description]
          * @return {[type]}         [description]
          */
-        public static void write_custom_color (string key, string value, bool break_line = false, bool space_init = false) {
-            string text_to_be_printed =  TextColorUtil.custom_color (key, value);
+        public static void write_custom_color (string value, bool break_line = false, bool space_init = false, string text_color = "", string background_color = "") {
+            string text_to_be_printed =  TextColorUtil.custom_color (value, text_color, background_color);
 
             if (break_line) {
                 if (space_init) {
@@ -142,8 +142,8 @@ namespace Vanat.Library.Utils {
             }
 
             foreach (string option in list.keys) {
-                write_custom_color("green", StringUtil.format(StringUtil.SPACE, option, max_value_length), false, true);
-                write_custom_color("white", list.get(option), true, false);
+                write_custom_color(StringUtil.format(StringUtil.SPACE, option, max_value_length), false, true, "green");
+                write_custom_color(list.get(option), true, false, "white");
             }
         }
     }

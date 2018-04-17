@@ -55,11 +55,11 @@ namespace Vanat.Library.Utils {
          * @param  {@code string} s
          * @return {@code void}
          */
-        public static string custom_color (string key, string value) {
+        public static string custom_color (string value, string text_color = "", string background_color = "") {
         	string SPACE = " ";
             string text_temp = "";
 
-            switch (key) {
+            switch (text_color) {
                 case "black":
                     text_temp = text_temp.concat(@"\x1b[30m$value\x1b[0m").concat(SPACE);
                     break;
@@ -86,6 +86,36 @@ namespace Vanat.Library.Utils {
                     break;
                 default:
                     text_temp = text_temp.concat(@"\x1b[39m$value\x1b[0m").concat(SPACE);
+                    break;
+            }
+
+            switch (background_color) {
+                case "black":
+                    text_temp = @"\x1b[30m$text_temp\x1b[0m";
+                    break;
+                case "red":
+                    text_temp = @"\x1b[31m$text_temp\x1b[0m";
+                    break;
+                case "green":
+                    text_temp = @"\x1b[32m$text_temp\x1b[0m";
+                    break;
+                case "yellow":
+                    text_temp = @"\x1b[44m$text_temp\x1b[0m";
+                    break;
+                case "blue":
+                    text_temp = @"\x1b[44m$text_temp\x1b[0m";
+                    break;
+                case "magenta":
+                    text_temp = @"\x1b[35m$text_temp\x1b[0m";
+                    break;
+                case "cyan":
+                    text_temp = @"\x1b[36m$text_temp\x1b[0m";
+                    break;
+                case "white":
+                    text_temp = @"\x1b[37m$text_temp\x1b[0m";
+                    break;
+                default:
+                    text_temp = @"\x1b[39m$text_temp\x1b[0m";
                     break;
             }
 

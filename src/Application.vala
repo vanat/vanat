@@ -73,6 +73,8 @@ namespace Vanat {
          * on the option entered by the user.
          *
          * @see Vanat.Library.Commands.CreateProjectCommand
+         * @see Vanat.Library.Commands.RequireCommand
+         * @see Vanat.Library.Commands.AboutCommand
          * @see Vanat.Library.Commands.InitCommand
          * @see Vanat.Library.Commands.InstallCommand
          * @see Vanat.Library.Commands.UpdateCommand
@@ -105,6 +107,7 @@ namespace Vanat {
                     RequireCommand.start_process ();
                     break;
                 case "-h":
+                case "help":
                 case "--help":
                 case "list":
                     HelpCommand.start_process ();

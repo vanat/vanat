@@ -38,12 +38,9 @@ namespace Vanat.Library.Commands {
          * and sets the default exit folder.
          */
         public AboutCommand () {
-           ConsoleUtil.write_title_custom_color("AboutCommand");
-           /* output
-           Composer - Package Management for PHP
-			Composer is a dependency manager tracking local dependencies of your projects and libraries.
-			See https://getcomposer.org/ for more infor
-            */
+           ConsoleUtil.write_custom_color("Vanat - Package Management for Vala", true, false, "green");
+           ConsoleUtil.write_custom_color("Vanat is a dependency manager tracking local dependencies of your projects and libraries.", true, false, "yellow");
+           ConsoleUtil.write_custom_color("See https://vanat.github.io for more infor", true, false, "yellow");
         }
 
         /**
