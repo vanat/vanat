@@ -4,8 +4,8 @@
     <h3 align="center">Dependency Manager for Vala</h3>
 </p>
 <p align="center">
-    <a href="https://gitter.im/vanat/vanat" target="_blank">
-        <img src="https://badges.gitter.im/vanat/vanat.svg">
+    <a href="https://vanat.slack.com/" target="_blank">
+        <img src="https://img.shields.io/badge/chat-on%20slack-FCA388.svg">
     </a>
     <img src="https://img.shields.io/badge/vala-v0.36.12-yellow.svg">
     <img src="https://img.shields.io/badge/meson-v0.40-brightgreen.svg">
