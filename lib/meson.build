@@ -19,7 +19,8 @@ dependencies = [
     gobject_dep,
     glib_dep,
     gee_dep,
-    gio_dep
+    gio_dep,
+    json_dep
 ]
 
 libraries = shared_library(

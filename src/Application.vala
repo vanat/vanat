@@ -64,7 +64,7 @@ namespace Vanat {
                 return 0;
             }
                
-            this.typed_option (args[1]);
+            this.typed_option (args);
             return 0;
         }
 
@@ -83,8 +83,8 @@ namespace Vanat {
          * @see Vanat.Library.Commands.VersionCommand
          * @return {@code void}
          */
-        private void typed_option (string arg) {
-            switch (arg) {
+        private void typed_option (string[] args) {
+            switch (args[1]) {
                 case "about":
                     AboutCommand.start_process ();
                     break;
@@ -104,7 +104,11 @@ namespace Vanat {
                     RemoveCommand.start_process ();
                     break;
                 case "require":
-                    RequireCommand.start_process ();
+                    if (args[2] != null) {
+                        RequireCommand.start_process (args[2]);    
+                    } else {
+                        ConsoleUtil.write_custom_color("Ops! You forgot to enter the package name to be added!", true, false, "red");
+                    }                    
                     break;
                 case "-h":
                 case "help":

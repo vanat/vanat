@@ -66,7 +66,7 @@ namespace Vanat.Library.Commands {
             ConsoleUtil.write("License: ");
             string license = stdin.read_line ();
 
-            string vanat_json = mount_file_data_vanat_json (package, description, version, author, type, license);
+            string vanat_json = this.mount_file_data_vanat_json (package, description, version, author, type, license);
             ConsoleUtil.write(StringUtil.BREAK_LINE);
             
             ConsoleUtil.write(vanat_json);
@@ -114,7 +114,9 @@ namespace Vanat.Library.Commands {
                 file_data_vanat_json += StringUtil.format(StringUtil.SPACE, StringUtil.EMPTY, 4, true) + "\"author\": \"" + author + "\"" + StringUtil.BREAK_LINE;
             }
 
-            file_data_vanat_json += StringUtil.format(StringUtil.SPACE, StringUtil.EMPTY, 4, true) + "\"require\": {}";
+            file_data_vanat_json += StringUtil.format(StringUtil.SPACE, StringUtil.EMPTY, 4, true) + "\"require\": {\n";
+            file_data_vanat_json += StringUtil.format(StringUtil.SPACE, StringUtil.EMPTY, 8, true) + "\"vala\":\"0.36.*\"\n";
+            file_data_vanat_json += StringUtil.format(StringUtil.SPACE, StringUtil.EMPTY, 4, true) + "}";
             file_data_vanat_json += "\n}";
 
             return file_data_vanat_json;

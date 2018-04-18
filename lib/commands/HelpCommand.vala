@@ -45,7 +45,7 @@ namespace Vanat.Library.Commands {
             options.set("-v, --version", "Display this application version");
 
             LinkedHashMap<string, string> available_commands = new LinkedHashMap<string, string>();
-            available_commands.set("about", "Create new project from a package into given directory.");
+            available_commands.set("about", "Short information about Vanat");
             available_commands.set("create-project", "Create new project from a package into given directory.");
             available_commands.set("help", "Display this help message");
             available_commands.set("init", "Creates a basic vanat.json file in current directory.");
