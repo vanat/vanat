@@ -44,7 +44,7 @@ namespace Vanat.Library.Commands {
         public RequireCommand (string arg) {
             if (this.valid_package(arg)) {
 
-                File file = File.new_for_path("vanat.json");
+                File file = File.new_for_uri("vanat.json");
                 try {
                     if(file.query_exists() == true){
                         var dis = new DataInputStream (file.read ());

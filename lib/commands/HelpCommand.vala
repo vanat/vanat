@@ -46,14 +46,14 @@ namespace Vanat.Library.Commands {
 
             LinkedHashMap<string, string> available_commands = new LinkedHashMap<string, string>();
             available_commands.set("about", "Short information about Vanat");
-            available_commands.set("create-project", "Create new project from a package into given directory.");
+            //available_commands.set("create-project", "Create new project from a package into given directory.");
             available_commands.set("help", "Display this help message");
             available_commands.set("init", "Creates a basic vanat.json file in current directory.");
-            available_commands.set("install", "Installs the project dependencies from the vanat.lock file if present, or falls back on the vanat.json.");
+            //available_commands.set("install", "Installs the project dependencies from the vanat.lock file if present, or falls back on the vanat.json.");
             available_commands.set("list", "Lists commands");
-            available_commands.set("remove", "Removes a package from the require.");
-            available_commands.set("require", "Adds required packages to your vanat.json and installs them");
-            available_commands.set("update", "Updates your dependencies to the latest version according to vanat.json, and updates the vanat.lock file.");            
+            //available_commands.set("remove", "Removes a package from the require.");
+            //available_commands.set("require", "Adds required packages to your vanat.json and installs them");
+            //available_commands.set("update", "Updates your dependencies to the latest version according to vanat.json, and updates the vanat.lock file.");            
 
             VersionCommand.start_process ();
 

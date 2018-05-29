@@ -16,7 +16,6 @@ posix_dep   = meson.get_compiler('vala').find_library('posix')
 subdir('lib')
 subdir('src')
 
-
 executable(
     meson.project_name(),
     src_files,
