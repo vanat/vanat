@@ -99,23 +99,23 @@ namespace Vanat.Library.Commands {
             file_data_vanat_json += "{\n";
             
             if (package.length > 0) {
-                file_data_vanat_json += StringUtil.format(StringUtil.SPACE, StringUtil.EMPTY, 4, true) + "\"name\": \"" + package + "\"" + StringUtil.BREAK_LINE;    
+                file_data_vanat_json += StringUtil.format(StringUtil.SPACE, StringUtil.EMPTY, 4, true) + "\"name\": \"" + package + "\"," + StringUtil.BREAK_LINE;    
             }
             
             if (description.length > 0) {
-                file_data_vanat_json += StringUtil.format(StringUtil.SPACE, StringUtil.EMPTY, 4, true) + "\"description\": \"" + description + "\"" + StringUtil.BREAK_LINE;
+                file_data_vanat_json += StringUtil.format(StringUtil.SPACE, StringUtil.EMPTY, 4, true) + "\"description\": \"" + description + "\"," + StringUtil.BREAK_LINE;
             }
 
             if (version.length > 0) {
-                file_data_vanat_json += StringUtil.format(StringUtil.SPACE, StringUtil.EMPTY, 4, true) + "\"version\": \"" + version + "\"" + StringUtil.BREAK_LINE;
+                file_data_vanat_json += StringUtil.format(StringUtil.SPACE, StringUtil.EMPTY, 4, true) + "\"version\": \"" + version + "\"," + StringUtil.BREAK_LINE;
             }
 
             if (author.length > 0) {
-                file_data_vanat_json += StringUtil.format(StringUtil.SPACE, StringUtil.EMPTY, 4, true) + "\"author\": \"" + author + "\"" + StringUtil.BREAK_LINE;
+                file_data_vanat_json += StringUtil.format(StringUtil.SPACE, StringUtil.EMPTY, 4, true) + "\"author\": \"" + author + "\"," + StringUtil.BREAK_LINE;
             }
 
             file_data_vanat_json += StringUtil.format(StringUtil.SPACE, StringUtil.EMPTY, 4, true) + "\"require\": {\n";
-            file_data_vanat_json += StringUtil.format(StringUtil.SPACE, StringUtil.EMPTY, 8, true) + "\"vala\":\"0.36.*\"\n";
+            file_data_vanat_json += StringUtil.format(StringUtil.SPACE, StringUtil.EMPTY, 8, true) + "\"vala\":\"0.36.*\",\n";
             file_data_vanat_json += StringUtil.format(StringUtil.SPACE, StringUtil.EMPTY, 4, true) + "}";
             file_data_vanat_json += "\n}";
 
