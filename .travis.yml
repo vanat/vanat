@@ -4,7 +4,7 @@ services:
  - docker
 
 env:
- - DEPENDENCY_PACKAGES="meson valac gobject-2.0 libglib2.0 libgee-0.8 gio-2.0 json-glib-1.0"
+ - DEPENDENCY_PACKAGES="meson valac libglib2.0-dev libgee-0.8-dev libarchive"
  
 install:
  - docker pull elementary/docker:loki
