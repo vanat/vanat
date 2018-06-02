@@ -146,5 +146,18 @@ namespace Vanat.Library.Utils {
                 write_custom_color(list.get(option), true, false, "white");
             }
         }
+
+        public static void write_action (string package, string version, string action) {
+
+            write ("  - ".concat(action).concat(" "));
+            write_custom_color (package, false, false, "green");
+            write (
+                TextColorUtil.custom_color("(", "while")
+                .concat(TextColorUtil.custom_color(version, "yellow"))
+                .concat(TextColorUtil.custom_color(")", "white"))
+                .concat("\n")
+            );
+        }
+
     }
 }
