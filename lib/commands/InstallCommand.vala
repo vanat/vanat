@@ -41,10 +41,6 @@ namespace Vanat.Library.Commands {
          * and sets the default exit folder.
          */
         public InstallCommand () {
-            ConsoleUtil.write_title_custom_color("InstallCommand");
-
-            //@"https://gitlab.com/robertsanseries/com.github.robertsanseries.ffmpeg-cli-wrapper.json/raw/master/com.github.robertsanseries.ffmpeg-cli-wrapper.json"
-
             try {
                 var file = File.new_for_path (Environment.get_current_dir ()  + "/vanat.json");
 
@@ -55,6 +51,9 @@ namespace Vanat.Library.Commands {
                 var data_stream = new DataInputStream(file.read());
                 string data = data_stream.read_until (StringUtil.EMPTY, null);
                 VanatJson vanat_json = new VanatJson(data);
+                int count = 0;
+
+                ConsoleUtil.write_custom_color ("Loading json that are in the package", true, false, "yellow");
 
                 foreach (string key in vanat_json.require.keys) {
                     string package;
@@ -71,10 +70,7 @@ namespace Vanat.Library.Commands {
                                         .concat(".json/raw/master/")
                                         .concat(repository)
                                         .concat(".json");
-
-                        ConsoleUtil.write_custom_color ("Loading json dependencies that are in vpackage", true, false, "while");
                         
-
                         var json = File.new_for_uri (url);
 
                         if (!json.query_exists()) {               
@@ -87,14 +83,71 @@ namespace Vanat.Library.Commands {
                         File vendor_dir = File.new_for_path (Environment.get_current_dir ().concat("/vendor/").concat(indexes[1]));
 
                         if (vendor_dir.query_exists()) {
-                            ConsoleUtil.write_action (indexes[1], vanat_json.require.get(key), "Deleting");
-                            FileUtil.delete_directory_with_parents(vendor_dir);
+                            continue;
+                        } else {
+                            count++;
                         }
 
-                        vendor_dir.make_directory_with_parents ();
-
+                        if (count > 1) {
+                            ConsoleUtil.write ("\n");
+                        }
+                        
                         ConsoleUtil.write_action (indexes[1], vanat_json.require.get(key), "Installing");
+                        
+                        // 
+                        File target = File.new_for_uri ("https://gitlab.com/robertsanseries/ffmpeg-cli-wrapper/-/archive/master/ffmpeg-cli-wrapper-master.zip");
+
+                        if (!target.query_exists()) {               
+                            throw new FileOrDirectoryNotFoundException.MESSAGE("File or Directory '%s' doesn't exists\n", target.get_path());
+                        }
+
+                        string dest_path_zip = Path.build_filename (Environment.get_current_dir ().concat("/vendor/").concat(indexes[1] + ".zip"));
+                        File destination_zip = File.new_for_path (dest_path_zip);
+
+                        target.copy (destination_zip, FileCopyFlags.OVERWRITE, null, null);
+
+                        var reader = new Archive.Read ();
+                        reader.support_filter_bzip2 ();
+                        reader.support_format_all ();
+
+                        var disk = new Archive.WriteDisk ();
+                        disk.set_standard_lookup ();
+
+                        string destination_decompress = Path.build_filename (Environment.get_current_dir ().concat("/vendor/"));
+
+                        reader.open_filename (dest_path_zip, 4096);
+                        unowned Archive.Entry entry;
+
+                        while (reader.next_header (out entry) == Archive.Result.OK) {
+                            entry.set_pathname (destination_decompress.concat(entry.pathname ()));
+
+                            if(disk.write_header (entry) != Archive.Result.OK) {
+                                continue;
+                            };
+
+                            void* buffer = null;
+                            size_t buffer_length;
+                            Posix.off_t offset;
+
+                            if (entry.size () > 0) {
+                                while (reader.read_data_block(out buffer, out buffer_length, out offset) != Archive.Result.EOF) {
+                                    disk.write_data_block(buffer, buffer_length, offset);
+                                }
+                            }
+                        }
+
+                        File target1 = File.new_for_path ("/home/robertsanseries/Desenvolvimento/desktop/dependency-manager/vanat_text/vendor/ffmpeg-cli-wrapper-master");
+                        FileUtil.copy_recursive(target1, vendor_dir);
+
+                        FileUtil.delete_directory_with_parents (target1);
+                        destination_zip.delete();
                     }
+                }
+
+                if (count == 0) {
+                    ConsoleUtil.write_custom_color ("> Nothing to install or update", true, false, "while");
+                } else {
+                    ConsoleUtil.write_custom_color ("✓ Completed", true, false, "cyan");
                 }
             }catch(Error e) {
                 error("%s", e.message);
