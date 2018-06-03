@@ -101,46 +101,10 @@ namespace Vanat.Library.Commands {
                             throw new FileOrDirectoryNotFoundException.MESSAGE("File or Directory '%s' doesn't exists\n", target.get_path());
                         }
 
-                        string dest_path_zip = Path.build_filename (Environment.get_current_dir ().concat("/vendor/").concat(indexes[1] + ".zip"));
-                        File destination_zip = File.new_for_path (dest_path_zip);
-
+                        File destination_zip = File.new_for_path (Path.build_filename (Environment.get_current_dir ().concat("/vendor/").concat(indexes[1] + ".zip")));
                         target.copy (destination_zip, FileCopyFlags.OVERWRITE, null, null);
 
-                        var reader = new Archive.Read ();
-                        reader.support_filter_bzip2 ();
-                        reader.support_format_all ();
-
-                        var disk = new Archive.WriteDisk ();
-                        disk.set_standard_lookup ();
-
-                        string destination_decompress = Path.build_filename (Environment.get_current_dir ().concat("/vendor/"));
-
-                        reader.open_filename (dest_path_zip, 4096);
-                        unowned Archive.Entry entry;
-
-                        while (reader.next_header (out entry) == Archive.Result.OK) {
-                            entry.set_pathname (destination_decompress.concat(entry.pathname ()));
-
-                            if(disk.write_header (entry) != Archive.Result.OK) {
-                                continue;
-                            };
-
-                            void* buffer = null;
-                            size_t buffer_length;
-                            Posix.off_t offset;
-
-                            if (entry.size () > 0) {
-                                while (reader.read_data_block(out buffer, out buffer_length, out offset) != Archive.Result.EOF) {
-                                    disk.write_data_block(buffer, buffer_length, offset);
-                                }
-                            }
-                        }
-
-                        File target1 = File.new_for_path ("/home/robertsanseries/Desenvolvimento/desktop/dependency-manager/vanat_text/vendor/ffmpeg-cli-wrapper-master");
-                        FileUtil.copy_recursive(target1, vendor_dir);
-
-                        FileUtil.delete_directory_with_parents (target1);
-                        destination_zip.delete();
+                        FileUtil.decompress (destination_zip, indexes[1], true);
                     }
                 }
 

@@ -74,5 +74,54 @@ namespace Vanat.Library.Utils {
 
           return true;
         }
+
+        public static void decompress (GLib.File src, string? name_folder = null,  bool delete_original = false) throws GLib.Error {
+            var reader = new Archive.Read ();
+            reader.support_filter_bzip2 ();
+            reader.support_format_all ();
+
+            var disk = new Archive.WriteDisk ();
+            disk.set_standard_lookup ();
+
+            reader.open_filename (src.get_path (), 4096);
+            unowned Archive.Entry entry;
+
+            var vendor_dir = Path.build_filename (Environment.get_current_dir ().concat("/vendor/"));
+            var name_extracted_folder = "";
+
+            while (reader.next_header (out entry) == Archive.Result.OK) {
+                entry.set_pathname (vendor_dir.concat(entry.pathname ()));
+
+                if (StringUtil.is_blank(name_extracted_folder)) {
+                     name_extracted_folder = entry.pathname ();
+                }
+
+                if(disk.write_header (entry) != Archive.Result.OK) {
+                    continue;
+                };
+
+                void* buffer = null;
+                size_t buffer_length;
+                Posix.off_t offset;
+
+                if (entry.size () > 0) {
+                    while (reader.read_data_block(out buffer, out buffer_length, out offset) != Archive.Result.EOF) {
+                        disk.write_data_block(buffer, buffer_length, offset);
+                    }
+                }
+            }
+
+            if (!StringUtil.is_blank(name_folder)) {
+                File extracted_folder = File.new_for_path (name_extracted_folder);
+                File new_folder = File.new_for_path (vendor_dir.concat(name_folder));
+                FileUtil.copy_recursive(extracted_folder, new_folder);
+                FileUtil.delete_directory_with_parents (extracted_folder);
+            }
+
+            if (delete_original) {
+                src.delete();
+            }
+        }
+
     }
 }
