@@ -21,7 +21,10 @@
  * SOFTWARE.
  */
 
+using Vanat.Library.Collections;
+using Vanat.Library.Exceptions;
 using Vanat.Library.Utils;
+using Vanat.Library.VJson;
 
 namespace Vanat.Library.Commands {
 
@@ -38,7 +41,81 @@ namespace Vanat.Library.Commands {
          * and sets the default exit folder.
          */
         public InstallCommand () {
-            ConsoleUtil.write_title_custom_color("InstallCommand");
+            try {
+                var file = File.new_for_path (Environment.get_current_dir ()  + "/vanat.json");
+
+                if (!file.query_exists()) {               
+                    throw new FileOrDirectoryNotFoundException.MESSAGE("File '%s' doesn't exists\n", file.get_path());
+                }
+
+                var data_stream = new DataInputStream(file.read());
+                string data = data_stream.read_until (StringUtil.EMPTY, null);
+                VanatJson vanat_json = new VanatJson(data);
+                int count = 0;
+
+                ConsoleUtil.write_custom_color ("Loading json that are in the package", true, false, "yellow");
+
+                foreach (string key in vanat_json.require.keys) {
+                    string package;
+                    string repository;
+
+                    if (key.contains ("/")) {
+                        string[] indexes = key.split("/");
+                        package = indexes[0] +  "." + indexes[1];
+
+                        repository = "com.github.".concat(package);
+                        string url = "https://gitlab.com/".concat(indexes[0])
+                                        .concat("/")
+                                        .concat(repository)
+                                        .concat(".json/raw/master/")
+                                        .concat(repository)
+                                        .concat(".json");
+                        
+                        var json = File.new_for_uri (url);
+
+                        if (!json.query_exists()) {               
+                            throw new FileOrDirectoryNotFoundException.MESSAGE("File '%s' doesn't exists\n", json.get_path());
+                        }
+
+                        var data_stream_repository = new DataInputStream(json.read());
+                        string data_repository = data_stream_repository.read_until (StringUtil.EMPTY, null);                     
+
+                        File vendor_dir = File.new_for_path (Environment.get_current_dir ().concat("/vendor/").concat(indexes[1]));
+
+                        if (vendor_dir.query_exists()) {
+                            continue;
+                        } else {
+                            count++;
+                        }
+
+                        if (count > 1) {
+                            ConsoleUtil.write ("\n");
+                        }
+                        
+                        ConsoleUtil.write_action (indexes[1], vanat_json.require.get(key), "Installing");
+                        
+                        // 
+                        File target = File.new_for_uri ("https://gitlab.com/robertsanseries/ffmpeg-cli-wrapper/-/archive/master/ffmpeg-cli-wrapper-master.zip");
+
+                        if (!target.query_exists()) {               
+                            throw new FileOrDirectoryNotFoundException.MESSAGE("File or Directory '%s' doesn't exists\n", target.get_path());
+                        }
+
+                        File destination_zip = File.new_for_path (Path.build_filename (Environment.get_current_dir ().concat("/vendor/").concat(indexes[1] + ".zip")));
+                        target.copy (destination_zip, FileCopyFlags.OVERWRITE, null, null);
+
+                        FileUtil.decompress (destination_zip, indexes[1], true);
+                    }
+                }
+
+                if (count == 0) {
+                    ConsoleUtil.write_custom_color ("> Nothing to install or update", true, false, "while");
+                } else {
+                    ConsoleUtil.write_custom_color ("✓ Completed", true, false, "cyan");
+                }
+            }catch(Error e) {
+                error("%s", e.message);
+            }
         }
 
         /**

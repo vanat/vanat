@@ -90,5 +90,32 @@ namespace Vanat.Library.Utils {
         		return value + text;
         	}
         }
+
+        /**
+         * Checks if a string is empty (""), null or with whitespace.
+         * 
+         * Exemple:
+         * > StringUtil.is_blank(null)       = true
+         * > StringUtil.is_blank("")         = true
+         * > StringUtil.is_blank(" ")        = true
+         * > StringUtil.is_blank("test")     = false
+         * > StringUtil.is_blank("  test  ") = false
+         *
+         * @param  {@code string} value - the string to check, may be null
+         * @return {@code bool} - true if the string is null, empty or whitespace only
+         */
+        public static bool is_blank (string? value) {
+            if (value == null || value.length == 0) {
+                return true;
+            }
+
+            for (int i = 0; i < value.length; i++) {
+                if (value[i] != ' ') {
+                    return false;
+                }
+            }
+
+            return true;
+        }
     }
 }

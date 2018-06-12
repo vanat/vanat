@@ -51,9 +51,7 @@ namespace Vanat.Library.Collections {
          */
         internal Gee.ArrayList<K> _keys = new Gee.ArrayList<K>();
 
-        /**
-         * 
-         */
+
         public new Gee.Set<unowned K> keys {
             owned get {
                 Gee.Set<K> keys = _keyset;
@@ -73,6 +71,7 @@ namespace Vanat.Library.Collections {
             owned get {
                 Gee.Collection<K> values = _values;
                 if (_values == null) {
+                    
                     values = new ValueCollection<K,V> (this);
                     _values = values;
                     values.add_weak_pointer ((void**) (&_values));
@@ -515,7 +514,8 @@ namespace Vanat.Library.Collections {
             }
 
             /**
-             * [foreach description]
+             * Apply function to each element returned by iterator untill last element or function return false.
+             * 
              * @param  {[type]} Gee.ForallFunc<Entry<K,V>> f             [description]
              * @return {[type]}                            [description]
              */
@@ -530,7 +530,7 @@ namespace Vanat.Library.Collections {
         }
 
         /**
-         * 
+         * An entry of a map.
          */
         public class Entry<K,V> : Gee.Map.Entry<K,V> {
             /**
@@ -544,14 +544,14 @@ namespace Vanat.Library.Collections {
             weak V _value;
 
             /**
-             * 
+             * The key of this entry.
              */
             public override K key {
                 get { return _key; }
             }
 
             /**
-             * 
+             * The value of this entry.
              */
             public override V value {
                 get { return _value; } 
@@ -559,7 +559,7 @@ namespace Vanat.Library.Collections {
             }
 
             /**
-             * 
+             * true if the setting value is permitted.
              */
             public override bool read_only {
                 get { return true; }

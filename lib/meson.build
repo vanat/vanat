@@ -10,29 +10,15 @@ lib_files = files(
     'commands/UpdateCommand.vala',
     'commands/VanatCommand.vala',
     'commands/VersionCommand.vala',
+    'exceptions/FileOrDirectoryNotFoundException.vala',
+    'exceptions/IllegalArgumentException.vala',
+    'exceptions/IOException.vala',
+    'exceptions/JsonException.vala',
+    'exceptions/NullReferenceException.vala',
+    'vjson/VanatJson.vala',
+    'vjson/VPackagistJson.vala',
     'utils/ConsoleUtil.vala',
+    'utils/FileUtil.vala',
     'utils/StringUtil.vala',
     'utils/TextColorUtil.vala'
 )
-
-dependencies = [
-    gobject_dep,
-    glib_dep,
-    gee_dep,
-    gio_dep,
-    json_dep
-]
-
-libraries = shared_library(
-    'vanat-0.1.0',
-    lib_files,
-    dependencies : dependencies,
-    install : true
-)
-
-lib_dependencies = declare_dependency(
-    dependencies: dependencies,
-    link_with : libraries,
-    include_directories: include_directories('.')
-)
-

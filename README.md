@@ -7,6 +7,7 @@
     <a href="https://vanat.slack.com/" target="_blank">
         <img src="https://img.shields.io/badge/chat-on%20slack-FCA388.svg">
     </a>
+    <img src="https://api.travis-ci.org/vanat/vanat.svg?branch=master">
     <img src="https://img.shields.io/badge/vala-v0.36.12-yellow.svg">
     <img src="https://img.shields.io/badge/meson-v0.40-brightgreen.svg">
     <img src="https://img.shields.io/badge/stable-v0.1.0-blue.svg">

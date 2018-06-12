@@ -42,9 +42,9 @@ namespace Vanat.Library.Commands {
          * and sets the default exit folder.
          */
         public RequireCommand (string arg) {
-            if (this.valid_package(arg)) {
+           // if (this.valid_package(arg)) {
 
-                File file = File.new_for_uri("vanat.json");
+                /*File file = File.new_for_uri("vanat.json");
                 try {
                     if(file.query_exists() == true){
                         var dis = new DataInputStream (file.read ());
@@ -56,7 +56,7 @@ namespace Vanat.Library.Commands {
                     }
                 } catch (Error e) {
                     stderr.printf ("Error: %s\n", e.message);
-                }
+                }*/
 
 
                 /*string data = ;
@@ -70,16 +70,16 @@ namespace Vanat.Library.Commands {
                 // Process (print) the file:
                 process (node);*/
                  
-            } else {
-                ConsoleUtil.write_custom_color("Ops! package not found.", true, false, "red");
-            }
+            //} else {
+           //     ConsoleUtil.write_custom_color("Ops! package not found.", true, false, "red");
+            //}
         }
 
          /**
          * [valid_package description]
-         * @param  {[type]} string arg           [description]
-         * @return {[type]}        [description]
-         */
+         * // @param  {[type]} string arg           [description]
+         * //@return {[type]}        [description]
+         * /
         private bool valid_package (string arg) {
             return true;
         }
@@ -173,7 +173,7 @@ namespace Vanat.Library.Commands {
             }
 
             stdout.printf ("\t%s %s\n", first, last);
-        }
+        }*/
 
         /**
          * [start_process description]
