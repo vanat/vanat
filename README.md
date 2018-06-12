@@ -7,13 +7,11 @@
     <a href="https://vanat.slack.com/" target="_blank">
         <img src="https://img.shields.io/badge/chat-on%20slack-FCA388.svg">
     </a>
+    <img src="https://api.travis-ci.org/vanat/vanat.svg?branch=development">
     <img src="https://img.shields.io/badge/vala-v0.36.12-yellow.svg">
-    <img src="https://img.shields.io/badge/meson-v0.40-brightgreen.svg?colorB=33905A">
+    <img src="https://img.shields.io/badge/meson-v0.40-brightgreen.svg">
     <img src="https://img.shields.io/badge/stable-v0.1.0-blue.svg">
     <img src="https://img.shields.io/github/license/mashape/apistatus.svg">
-    <br>   
-    Master: <img src="https://api.travis-ci.org/vanat/vanat.svg?branch=master"> &nbsp;&nbsp;&nbsp;
-    Development: <img src="https://api.travis-ci.org/vanat/vanat.svg?branch=development">
 </p>
 
 ### About Vanat
