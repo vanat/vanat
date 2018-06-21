@@ -32,7 +32,7 @@ namespace Vanat {
      * @since 0.1.0
      */
     public static void main (string [] args) {
-        var app = new Vanat.Application ();
+        var app = new Application ();
         app.run (args);
     }
 }

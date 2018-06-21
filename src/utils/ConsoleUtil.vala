@@ -21,10 +21,10 @@
  * SOFTWARE.
  */
 
-using Vanat.Library.Commands;
-using Vanat.Library.Collections;
+using Vanat.Commands;
+using Vanat.Collections;
 
-namespace Vanat.Library.Utils {
+namespace Vanat.Utils {
 
     /**
      * The {@code ConsoleUtil} class handles data to be displayed on the console

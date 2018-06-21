@@ -21,10 +21,10 @@
  * SOFTWARE.
  */
 
-using Vanat.Library.Utils;
-using Vanat.Library.Collections;
+using Vanat.Utils;
+using Vanat.Collections;
 
-namespace Vanat.Library.Commands {
+namespace Vanat.Commands {
 
     /**
      * The {@code VersionCommand} class

@@ -21,7 +21,7 @@
  * SOFTWARE.
  */
 
-namespace Vanat.Library.Exceptions {
+namespace Vanat.Exceptions {
 
     /**
      * 

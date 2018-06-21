@@ -21,12 +21,12 @@
  * SOFTWARE.
  */
 
-using Vanat.Library.Collections;
-using Vanat.Library.Exceptions;
-using Vanat.Library.Utils;
-using Vanat.Library.VJson;
+using Vanat.Collections;
+using Vanat.Exceptions;
+using Vanat.Utils;
+using Vanat.VJson;
 
-namespace Vanat.Library.Commands {
+namespace Vanat.Commands {
 
     /**
      * The {@code InstallCommand} class
@@ -36,12 +36,14 @@ namespace Vanat.Library.Commands {
      */
     public class InstallCommand {
      
-        /**
-         * Constructs a new {@code InstallCommand} object 
-         * and sets the default exit folder.
-         */
         public InstallCommand () {
             try {
+                var vanat_lock_file = File.new_for_path (Environment.get_current_dir ()  + "/vanat.lock");
+
+                if (vanat_lock_file.query_exists()) {               
+                    
+                }
+
                 var vanat_json_file = File.new_for_path (Environment.get_current_dir ()  + "/vanat.json");
 
                 if (!vanat_json_file.query_exists()) {               

@@ -21,12 +21,12 @@
  * SOFTWARE.
  */
 
-using Vanat.Library.Collections;
-using Vanat.Library.Exceptions;
-using Vanat.Library.Utils;
+using Vanat.Collections;
+using Vanat.Exceptions;
+using Vanat.Utils;
 using Json;
 
-namespace Vanat.Library.VJson {
+namespace Vanat.VJson {
 
     /**
      * The {@code VanatJson} class
