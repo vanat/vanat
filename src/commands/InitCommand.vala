@@ -21,9 +21,9 @@
  * SOFTWARE.
  */
 
-using Vanat.Library.Utils;
+using Vanat.Utils;
 
-namespace Vanat.Library.Commands {
+namespace Vanat.Commands {
 
     /**
      * The {@code InitCommand} class
@@ -112,6 +112,14 @@ namespace Vanat.Library.Commands {
 
             if (author.length > 0) {
                 file_data_vanat_json += StringUtil.format(StringUtil.SPACE, StringUtil.EMPTY, 4, true) + "\"author\": \"" + author + "\"," + StringUtil.BREAK_LINE;
+            }
+
+            if (type.length > 0) {
+                file_data_vanat_json += StringUtil.format(StringUtil.SPACE, StringUtil.EMPTY, 4, true) + "\"type\": \"" + type + "\"," + StringUtil.BREAK_LINE;
+            }
+
+            if (license.length > 0) {
+                file_data_vanat_json += StringUtil.format(StringUtil.SPACE, StringUtil.EMPTY, 4, true) + "\"license\": \"" + license + "\"," + StringUtil.BREAK_LINE;
             }
 
             file_data_vanat_json += StringUtil.format(StringUtil.SPACE, StringUtil.EMPTY, 4, true) + "\"require\": {\n";

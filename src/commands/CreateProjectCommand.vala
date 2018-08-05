@@ -21,24 +21,24 @@
  * SOFTWARE.
  */
 
-using Vanat.Library.Utils;
+using Vanat.Utils;
 
-namespace Vanat.Library.Commands {
+namespace Vanat.Commands {
 
     /**
-     * The {@code RemoveCommand} class
+     * The {@code CreateProjectCommand} class
      *
      * @author Robert San
      * @since 0.1.0
      */
-    public class RemoveCommand {
-     
+    public class CreateProjectCommand {
+
         /**
-         * Constructs a new {@code RemoveCommand} object 
+         * Constructs a new {@code VersionCommand} object 
          * and sets the default exit folder.
          */
-        public RemoveCommand () {
-           ConsoleUtil.write_title_custom_color("RemoveCommand");
+        public CreateProjectCommand () {
+           ConsoleUtil.write_title_custom_color("CreateProjectCommand");
         }
 
         /**
@@ -46,8 +46,8 @@ namespace Vanat.Library.Commands {
          * 
          * @return {[type]} [description]
          */
-        public static RemoveCommand start_process () {
-            return new RemoveCommand ();
+        public static CreateProjectCommand start_process () {
+            return new CreateProjectCommand ();
         }
     }
 }

@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2018 Robert San <robertsanseries@gmail.com>
+ * Copyright (c) 2018 Vanat 
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,12 +21,33 @@
  * SOFTWARE.
  */
 
-namespace Vanat.Library.Exceptions {
+using Vanat.Utils;
+
+namespace Vanat.Commands {
 
     /**
-     * 
+     * The {@code UpdateCommand} class
+     *
+     * @author Robert San
+     * @since 0.1.0
      */
-    public errordomain FileOrDirectoryNotFoundException { 
-        MESSAGE
+    public class UpdateCommand {
+     
+        /**
+         * Constructs a new {@code UpdateCommand} object 
+         * and sets the default exit folder.
+         */
+        public UpdateCommand () {
+            ConsoleUtil.write_title_custom_color("UpdateCommand");
+        }
+
+        /**
+         * [start_process description]
+         * 
+         * @return {[type]} [description]
+         */
+        public static UpdateCommand start_process () {
+            return new UpdateCommand ();
+        }
     }
 }

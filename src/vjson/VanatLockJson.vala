@@ -21,12 +21,12 @@
  * SOFTWARE.
  */
 
-using Vanat.Library.Collections;
-using Vanat.Library.Exceptions;
-using Vanat.Library.Utils;
+using Vanat.Collections;
+using Vanat.Exceptions;
+using Vanat.Utils;
 using Json;
 
-namespace Vanat.Library.VJson {
+namespace Vanat.VJson {
 
     /**
      * The {@code VanatJson} class
@@ -34,7 +34,7 @@ namespace Vanat.Library.VJson {
      * @author Robert San
      * @since 0.1.0
      */
-    public class VPackagistJson {
+    public class VanatLockJson {
 
         public string name;
         public string description;
@@ -46,7 +46,7 @@ namespace Vanat.Library.VJson {
          * Constructs a new {@code InstallCommand} object 
          * and sets the default exit folder.
          */
-        public VPackagistJson (string value)  throws Error  {
+        public VanatLockJson (string value)  throws Error  {
 
             if (! StringUtil.is_blank (value)) {
 

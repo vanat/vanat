@@ -21,9 +21,9 @@
  * SOFTWARE.
  */
 
-using Vanat.Library.Utils;
+using Vanat.Utils;
 
-namespace Vanat.Library.Commands {
+namespace Vanat.Commands {
     public errordomain MyError {
             INVALID_FORMAT
         }

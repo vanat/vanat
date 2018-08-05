@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2018 Vanat 
+ * Copyright (c) 2018 Robert San <robertsanseries@gmail.com>
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -21,33 +21,12 @@
  * SOFTWARE.
  */
 
-using Vanat.Library.Utils;
-
-namespace Vanat.Library.Commands {
+namespace Vanat.Exceptions {
 
     /**
-     * The {@code CreateProjectCommand} class
-     *
-     * @author Robert San
-     * @since 0.1.0
+     * 
      */
-    public class CreateProjectCommand {
-
-        /**
-         * Constructs a new {@code VersionCommand} object 
-         * and sets the default exit folder.
-         */
-        public CreateProjectCommand () {
-           ConsoleUtil.write_title_custom_color("CreateProjectCommand");
-        }
-
-        /**
-         * [start_process description]
-         * 
-         * @return {[type]} [description]
-         */
-        public static CreateProjectCommand start_process () {
-            return new CreateProjectCommand ();
-        }
+    public errordomain IOException { 
+        MESSAGE
     }
 }

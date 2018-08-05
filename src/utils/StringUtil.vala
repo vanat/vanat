@@ -21,7 +21,7 @@
  * SOFTWARE.
  */
 
-namespace Vanat.Library.Utils {
+namespace Vanat.Utils {
 
     /**
      * The {@code TextColorUtil} class handles data to be displayed on the console

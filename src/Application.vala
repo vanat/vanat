@@ -21,8 +21,8 @@
  * SOFTWARE.
  */
 
-using Vanat.Library.Utils;
-using Vanat.Library.Commands;
+using Vanat.Utils;
+using Vanat.Commands;
 
 namespace Vanat {
 
@@ -35,8 +35,7 @@ namespace Vanat {
     public class Application : GLib.Application {
 
         /**
-         * Constructs a new {@code Application} object 
-         * and sets the default exit folder.
+         * Constructs a new {@code Application} object.
          */
         public Application () {
             Object (
@@ -49,8 +48,7 @@ namespace Vanat {
          * The command_line signal is issued immediately after the object 
          * is created to process the typed arguments.
          *
-         * @see Vanat.Library.Commands.ConsoleUtil#error
-         * @see Vanat.Library.Commands.ConsoleUtil#info
+         * @see Vanat.Commands.VanatCommand
          * @param  {@code ApplicationCommandLine} command_line
          * @return {@code int}
          */
@@ -72,15 +70,15 @@ namespace Vanat {
          * Responsible for performing the action depending
          * on the option entered by the user.
          *
-         * @see Vanat.Library.Commands.CreateProjectCommand
-         * @see Vanat.Library.Commands.RequireCommand
-         * @see Vanat.Library.Commands.AboutCommand
-         * @see Vanat.Library.Commands.InitCommand
-         * @see Vanat.Library.Commands.InstallCommand
-         * @see Vanat.Library.Commands.UpdateCommand
-         * @see Vanat.Library.Commands.RemoveCommand
-         * @see Vanat.Library.Commands.HelpCommand
-         * @see Vanat.Library.Commands.VersionCommand
+         * @see Vanat.Commands.CreateProjectCommand
+         * @see Vanat.Commands.RequireCommand
+         * @see Vanat.Commands.AboutCommand
+         * @see Vanat.Commands.InitCommand
+         * @see Vanat.Commands.InstallCommand
+         * @see Vanat.Commands.UpdateCommand
+         * @see Vanat.Commands.RemoveCommand
+         * @see Vanat.Commands.HelpCommand
+         * @see Vanat.Commands.VersionCommand
          * @return {@code void}
          */
         private void typed_option (string[] args) {

@@ -21,33 +21,38 @@
  * SOFTWARE.
  */
 
-using Vanat.Library.Utils;
+using Vanat.Utils;
+using Vanat.Collections;
 
-namespace Vanat.Library.Commands {
+namespace Vanat.Commands {
 
     /**
-     * The {@code UpdateCommand} class
+     * The {@code VersionCommand} class
      *
      * @author Robert San
      * @since 0.1.0
      */
-    public class UpdateCommand {
-     
+    public class VersionCommand {
+
         /**
-         * Constructs a new {@code UpdateCommand} object 
+         * Constructs a new {@code VersionCommand} object 
          * and sets the default exit folder.
          */
-        public UpdateCommand () {
-            ConsoleUtil.write_title_custom_color("UpdateCommand");
+        public VersionCommand () {
+            LinkedHashMap<string, string> msg = new LinkedHashMap<string, string>();
+            msg.set("green", "Vanat");
+            msg.set("white", "version");
+            msg.set("yellow", "0.1.0");
+            ConsoleUtil.write_custom_color_map(msg);
         }
-
+     
         /**
          * [start_process description]
          * 
          * @return {[type]} [description]
          */
-        public static UpdateCommand start_process () {
-            return new UpdateCommand ();
+        public static VersionCommand start_process () {
+            return new VersionCommand ();
         }
     }
 }

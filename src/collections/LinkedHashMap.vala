@@ -21,7 +21,7 @@
  * SOFTWARE.
  */
 
-namespace Vanat.Library.Collections {
+namespace Vanat.Collections {
 
     /**
      * @Author: Che Bizarro

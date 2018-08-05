@@ -21,12 +21,13 @@
  * SOFTWARE.
  */
 
-namespace Vanat.Library.Exceptions {
+namespace Vanat.Exceptions {
 
     /**
      * 
      */
-    public errordomain IllegalArgumentException { 
-        MESSAGE
+    public errordomain JsonException { 
+        MESSAGE,
+        INVALID_FORMAT
     }
 }

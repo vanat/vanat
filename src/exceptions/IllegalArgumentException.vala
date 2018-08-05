@@ -21,12 +21,12 @@
  * SOFTWARE.
  */
 
-namespace Vanat.Library.Exceptions {
+namespace Vanat.Exceptions {
 
     /**
      * 
      */
-    public errordomain IOException { 
+    public errordomain IllegalArgumentException { 
         MESSAGE
     }
 }
