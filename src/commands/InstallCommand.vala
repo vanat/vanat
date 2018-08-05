@@ -38,16 +38,19 @@ namespace Vanat.Commands {
      
         public InstallCommand () {
             try {
-                var vanat_lock_file = File.new_for_path (Environment.get_current_dir ()  + "/vanat.lock");
+                //
+                //var vanat_lock_file = File.new_for_path (Environment.get_current_dir ()  + "/vanat.lock");
 
-                if (vanat_lock_file.query_exists()) {               
+                //if (vanat_lock_file.query_exists ()) {               
                     
-                }
+                //}
+                //
+                message (Environment.get_current_dir ().concat ("/vanat.json"));
 
-                var vanat_json_file = File.new_for_path (Environment.get_current_dir ()  + "/vanat.json");
+                var vanat_json_file = File.new_for_path (Environment.get_current_dir ().concat ("/vanat.json"));
 
                 if (!vanat_json_file.query_exists()) {               
-                    throw new FileOrDirectoryNotFoundException.MESSAGE("File '%s' doesn't exists\n", vanat_json_file.get_path());
+                    throw new FileOrDirectoryNotFoundException.MESSAGE("File doesn't exists\n");
                 }
 
                 var data_stream = new DataInputStream(vanat_json_file.read());
@@ -68,10 +71,12 @@ namespace Vanat.Commands {
                         repository = "com.github.".concat(package);
                         string url = "https://raw.githubusercontent.com/vpackagist/".concat(repository).concat("/master/").concat(repository).concat(".json");
                        
-                         var json = File.new_for_uri (url);
+                        var json = File.new_for_uri (url);
+
+                        message(url);
 
                         if (!json.query_exists()) {               
-                            throw new FileOrDirectoryNotFoundException.MESSAGE("File '%s' doesn't exists\n", json.get_path());
+                            throw new FileOrDirectoryNotFoundException.MESSAGE("The json file of the url does not exist\n");
                         }
 
                         var data_stream_repository = new DataInputStream(json.read());
@@ -100,7 +105,7 @@ namespace Vanat.Commands {
                         File target = File.new_for_uri ("https://github.com/".concat(key).concat("/archive/master.zip"));
 
                         if (!target.query_exists()) {               
-                            throw new FileOrDirectoryNotFoundException.MESSAGE("File or Directory '%s' doesn't exists\n", target.get_path());
+                            throw new FileOrDirectoryNotFoundException.MESSAGE("File or Directory doesn't exists\n");
                         }
 
                         File destination_zip = File.new_for_path (Path.build_filename (Environment.get_current_dir ().concat("/vendor/").concat(indexes[1] + "-master.zip")));
@@ -108,11 +113,11 @@ namespace Vanat.Commands {
 
                         FileUtil.decompress (destination_zip, indexes[1], true);
 
-                        var meson_file = File.new_for_path ("meson.build");
+                        var meson_file = File.new_for_path (Environment.get_current_dir ().concat("/meson.build"));
 
                         // delete if file already exists
                         if (!meson_file.query_exists ()) {
-                            throw new FileOrDirectoryNotFoundException.MESSAGE("File '%s' doesn't exists\n", meson_file.get_path());
+                            throw new FileOrDirectoryNotFoundException.MESSAGE("File meson.build doesn't exists\n");
                         }
 
                         FileIOStream ios = meson_file.open_readwrite ();
@@ -123,9 +128,9 @@ namespace Vanat.Commands {
                         uint8[] text_data = text.data;
                         long written = 0;
                         
-                        /*while (written < text_data.length) { 
-                            written += dos.write (text_data[written:text_data.length]);
-                        }*/
+                        //while (written < text_data.length) { 
+                          //  written += dos.write (text_data[written:text_data.length]);
+                        //}
 
                     }
                 }

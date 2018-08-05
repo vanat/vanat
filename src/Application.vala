@@ -35,8 +35,7 @@ namespace Vanat {
     public class Application : GLib.Application {
 
         /**
-         * Constructs a new {@code Application} object 
-         * and sets the default exit folder.
+         * Constructs a new {@code Application} object.
          */
         public Application () {
             Object (
@@ -49,8 +48,7 @@ namespace Vanat {
          * The command_line signal is issued immediately after the object 
          * is created to process the typed arguments.
          *
-         * @see Vanat.Commands.ConsoleUtil#error
-         * @see Vanat.Commands.ConsoleUtil#info
+         * @see Vanat.Commands.VanatCommand
          * @param  {@code ApplicationCommandLine} command_line
          * @return {@code int}
          */
