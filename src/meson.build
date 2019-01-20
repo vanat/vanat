@@ -1,6 +1,7 @@
 src_files = files (
 	'collections/LinkedHashMap.vala',   
     'commands/AboutCommand.vala',
+    'commands/CommandFacade.vala',
     'commands/CreateProjectCommand.vala',
     'commands/HelpCommand.vala',
     'commands/InitCommand.vala',

@@ -29,36 +29,38 @@ namespace Vanat {
     /**
      * This {@code Application} class is for working on command line.
      *
+     * @see Vanat.Commands.CommandFacade
      * @author Robert San
      * @since 0.1.0
      */
     public class Application : GLib.Application {
 
+        private CommandFacade commands;
+
         /**
          * Constructs a new {@code Application} object.
          */
-        public Application () {
+        public Application (CommandFacade command_facade) {
             Object (
                 application_id: "com.github.vanat",
                 flags: ApplicationFlags.HANDLES_COMMAND_LINE
             );
+
+            this.commands = command_facade;
         }
 
         /**
          * The command_line signal is issued immediately after the object 
          * is created to process the typed arguments.
          *
-         * @see Vanat.Commands.VanatCommand
          * @param  {@code ApplicationCommandLine} command_line
          * @return {@code int}
          */
         public override int command_line (GLib.ApplicationCommandLine command_line) {
-            // Gets the arguments entered by the user
             string[] args = command_line.get_arguments ();
 
-            // If the user does not enter any arguments, the message is displayed.
             if (args.length < 2) {
-                VanatCommand.start_process (args[0]);
+                this.commands.start_command_vanat (args[0]);
                 return 0;
             }
                
@@ -70,40 +72,31 @@ namespace Vanat {
          * Responsible for performing the action depending
          * on the option entered by the user.
          *
-         * @see Vanat.Commands.CreateProjectCommand
-         * @see Vanat.Commands.RequireCommand
-         * @see Vanat.Commands.AboutCommand
-         * @see Vanat.Commands.InitCommand
-         * @see Vanat.Commands.InstallCommand
-         * @see Vanat.Commands.UpdateCommand
-         * @see Vanat.Commands.RemoveCommand
-         * @see Vanat.Commands.HelpCommand
-         * @see Vanat.Commands.VersionCommand
          * @return {@code void}
          */
         private void typed_option (string[] args) {
             switch (args[1]) {
                 case "about":
-                    AboutCommand.start_process ();
+                    this.commands.start_command_about ();
                     break;
                 case "create-project":
-                    CreateProjectCommand.start_process ();
+                    this.commands.start_command_create_project ();
                     break;
                 case "init":
-                    InitCommand.start_process ();
+                    this.commands.start_command_init ();
                     break;
                 case "install":
-                    InstallCommand.start_process (); 
+                    this.commands.start_command_install ();
                     break;
                 case "update":
-                    UpdateCommand.start_process ();
+                    this.commands.start_command_update ();
                     break;
                 case "remove":
-                    RemoveCommand.start_process ();
+                    this.commands.start_command_remove ();
                     break;
                 case "require":
                     if (args[2] != null) {
-                        RequireCommand.start_process (args[2]);    
+                        this.commands.start_command_require (args[2]);
                     } else {
                         ConsoleUtil.write_custom_color("Ops! You forgot to enter the package name to be added!", true, false, "red");
                     }                    
@@ -112,14 +105,14 @@ namespace Vanat {
                 case "help":
                 case "--help":
                 case "list":
-                    HelpCommand.start_process ();
+                    this.commands.start_command_help ();
                     break;
                 case "-v":
                 case "--version":
-                    VersionCommand.start_process ();
+                    this.commands.start_command_version ();
                     break;
                 default:
-                    HelpCommand.start_process ();
+                    this.commands.start_command_help ();
                     break;
             }
         }

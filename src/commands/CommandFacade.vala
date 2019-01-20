@@ -21,21 +21,54 @@
  * SOFTWARE.
  */
 
-using Vanat.Commands;
-
-namespace Vanat {
+namespace Vanat.Commands {
 
     /**
-     * Main method. Responsible for starting the {@code Application} class.
+     * The {@code CommandFacade} class
      *
-     * @see Application
-     * @see Vanat.Commands.CommandFacade
-     * @return {@code void}
      * @author Robert San
      * @since 0.1.0
      */
-    public static void main (string [] args) {
-        var app = new Application (new CommandFacade ());
-        app.run (args);
+    public class CommandFacade {
+
+        public void start_command_vanat (string arg = "") {
+            VanatCommand.start_process (arg); 
+        }
+
+        public void start_command_about () {
+            AboutCommand.start_process (); 
+        }
+
+        public void start_command_create_project () {
+            CreateProjectCommand.start_process (); 
+        }
+
+        public void start_command_init () {
+            InitCommand.start_process ();
+        }
+
+        public void start_command_install () {
+            InstallCommand.start_process ();  
+        }
+
+        public void start_command_update () {
+            UpdateCommand.start_process (); 
+        }
+
+        public void start_command_remove () {
+            RemoveCommand.start_process ();
+        }
+
+        public void start_command_require (string arg = "") {
+            RequireCommand.start_process (arg);
+        }
+
+        public void start_command_help () {
+            HelpCommand.start_process ();
+        }
+
+        public void start_command_version () {
+            VersionCommand.start_process ();
+        }
     }
 }
