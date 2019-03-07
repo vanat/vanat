@@ -88,7 +88,17 @@ namespace Vanat.Commands {
                     string user_name = indexes[0];
                     string package_name = indexes[1];
 
-                    this.download_package(vanat_json, key, user_name, package_name, ref count);                    
+                    File package_dir = File.new_for_path (Environment.get_current_dir ().concat("/vendor/").concat(package_name));
+                    if (package_dir.query_exists ()) {
+                        continue;
+                    } else {
+                        this.download_package(vanat_json, key, user_name, package_name);
+                        count++;
+
+                        if (count > 1) {
+                            ConsoleUtil.write ("\n");
+                        }
+                    }
                 } else {
                     throw new JsonException.INVALID_FORMAT ("'require' structure in Json is in invalid format");
                 }
@@ -101,7 +111,7 @@ namespace Vanat.Commands {
             }
         }
 
-        private void download_package (VanatJson vanat_json, string key, string user_name, string package_name, ref int count) throws Error {
+        private void download_package (VanatJson vanat_json, string key, string user_name, string package_name) throws Error {
             string repository = "com.github.".concat(user_name +  "." + package_name);
             string url = "https://raw.githubusercontent.com/vpackagist/".concat(repository).concat("/master/").concat(repository).concat(".json");
            
@@ -109,21 +119,10 @@ namespace Vanat.Commands {
             if (!json.query_exists()) {               
                 throw new FileOrDirectoryNotFoundException.MESSAGE("The json file of the url does not exist\n");
             }
-
-            File package_dir = File.new_for_path (Environment.get_current_dir ().concat("/vendor/").concat(package_name));
-            if (package_dir.query_exists ()) {
-                return;
-            } else {
-                count++;
-            }
-                                
+                               
             File target = File.new_for_uri ("https://github.com/".concat(key).concat("/archive/").concat(vanat_json.require.get(key)).concat(".zip"));
             if (!target.query_exists()) {               
                 throw new FileOrDirectoryNotFoundException.MESSAGE("Release ".concat(vanat_json.require.get(key)).concat(" of the ").concat(key).concat(" package does not exist\n"));
-            }
-
-            if (count > 1) {
-                ConsoleUtil.write ("\n");
             }
 
             ConsoleUtil.write_action (package_name, vanat_json.require.get(key), "Installing");
@@ -133,10 +132,6 @@ namespace Vanat.Commands {
 
             FileUtil.decompress (destination_zip, package_name, true);
         }
-
-        /*private void add_package_meson_file () throws Error {
-
-        }*/
 
         /**
          * [start_process description]
