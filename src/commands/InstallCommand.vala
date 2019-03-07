@@ -88,7 +88,7 @@ namespace Vanat.Commands {
                     string user_name = indexes[0];
                     string package_name = indexes[1];
 
-                    this.download_package(key, user_name, package_name, ref count);                    
+                    this.download_package(vanat_json, key, user_name, package_name, ref count);                    
                 } else {
                     throw new JsonException.INVALID_FORMAT ("'require' structure in Json is in invalid format");
                 }
@@ -101,7 +101,7 @@ namespace Vanat.Commands {
             }
         }
 
-        private void download_package (string key, string user_name, string package_name, ref int count) throws Error {
+        private void download_package (VanatJson vanat_json, string key, string user_name, string package_name, ref int count) throws Error {
             string repository = "com.github.".concat(user_name +  "." + package_name);
             string url = "https://raw.githubusercontent.com/vpackagist/".concat(repository).concat("/master/").concat(repository).concat(".json");
            
@@ -112,7 +112,7 @@ namespace Vanat.Commands {
 
             File package_dir = File.new_for_path (Environment.get_current_dir ().concat("/vendor/").concat(package_name));
             if (package_dir.query_exists ()) {
-                continue;
+                return;
             } else {
                 count++;
             }
@@ -131,17 +131,12 @@ namespace Vanat.Commands {
             File destination_zip = File.new_for_path (Path.build_filename (Environment.get_current_dir ().concat("/vendor/").concat(package_name + "-master.zip")));
             target.copy (destination_zip, FileCopyFlags.OVERWRITE, null, null);
 
-            Array<File> path_names = FileUtil.decompress (destination_zip, package_name, true);
-            for (int i = 0; i < path_names.length ; i++) {
-                if (FileUtil.file_ends_with(path_names.index(i), ".vala")) {
-                    message (path_names.index(i).get_basename() + "\n");
-                }
-            }
+            FileUtil.decompress (destination_zip, package_name, true);
         }
 
-        private void add_package_meson_file () throws Error {
+        /*private void add_package_meson_file () throws Error {
 
-        }
+        }*/
 
         /**
          * [start_process description]

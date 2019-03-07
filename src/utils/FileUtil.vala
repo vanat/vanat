@@ -76,9 +76,7 @@ namespace Vanat.Utils {
           return true;
         }
 
-        public static Array<File> decompress (GLib.File src, string? name_folder = null,  bool delete_original = false) throws GLib.Error {
-            Array<File> files = new Array<File> ();
-
+        public static void decompress (GLib.File src, string? name_folder = null,  bool delete_original = false) throws GLib.Error {
             var reader = new Archive.Read ();
             reader.support_filter_bzip2 ();
             reader.support_format_all ();
@@ -93,11 +91,7 @@ namespace Vanat.Utils {
             var name_extracted_folder = "";
 
             while (reader.next_header (out entry) == Archive.Result.OK) {
-                entry.set_pathname (vendor_dir.concat(entry.pathname ()));                   
-
-                var old_file = File.new_for_path(entry.pathname());
-                var new_file = File.new_for_path(vendor_dir.concat(name_folder).concat("/").concat(old_file.get_basename ()));
-                files.append_val(new_file);
+                entry.set_pathname (vendor_dir.concat(entry.pathname ()));
 
                 if (StringUtil.is_blank(name_extracted_folder)) {
                      name_extracted_folder = entry.pathname ();
@@ -128,8 +122,6 @@ namespace Vanat.Utils {
             if (delete_original) {
                 src.delete();
             }
-
-            return files;
         }
 
         public static bool file_ends_with(File file, string extension) {
