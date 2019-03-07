@@ -38,111 +38,109 @@ namespace Vanat.Commands {
      
         public InstallCommand () {
             try {
-                //
-                //var vanat_lock_file = File.new_for_path (Environment.get_current_dir ()  + "/vanat.lock");
-
-                //if (vanat_lock_file.query_exists ()) {               
-                    
-                //}
-                //
-                message (Environment.get_current_dir ().concat ("/vanat.json"));
-
-                var vanat_json_file = File.new_for_path (Environment.get_current_dir ().concat ("/vanat.json"));
-
+                File vanat_json_file = File.new_for_path (Environment.get_current_dir ().concat ("/vanat.json"));
                 if (!vanat_json_file.query_exists()) {               
                     throw new FileOrDirectoryNotFoundException.MESSAGE("File doesn't exists\n");
                 }
 
-                var data_stream = new DataInputStream(vanat_json_file.read());
-                string data = data_stream.read_until (StringUtil.EMPTY, null);
-                VanatJson vanat_json = new VanatJson(data);
+                var meson_file = File.new_for_path (Environment.get_current_dir ().concat("/meson.build"));
+                if (!meson_file.query_exists ()) {
+                    throw new FileOrDirectoryNotFoundException.MESSAGE("File meson.build doesn't exists\n");
+                }
 
                 ConsoleUtil.write_custom_color ("Loading json that are in the package", true, false, "yellow");
+                
+                DataInputStream data_stream = new DataInputStream(vanat_json_file.read());
+                
+                size_t length;
+                string data = data_stream.read_upto (StringUtil.EMPTY, 1, out length);
 
-                int count = 0;
-                foreach (string key in vanat_json.require.keys) {
-                    string package;
-                    string repository;
-
-                    if (key.contains ("/")) {
-                        string[] indexes = key.split("/");
-                        package = indexes[0] +  "." + indexes[1];
-
-                        repository = "com.github.".concat(package);
-                        string url = "https://raw.githubusercontent.com/vpackagist/".concat(repository).concat("/master/").concat(repository).concat(".json");
-                       
-                        var json = File.new_for_uri (url);
-
-                        message(url);
-
-                        if (!json.query_exists()) {               
-                            throw new FileOrDirectoryNotFoundException.MESSAGE("The json file of the url does not exist\n");
-                        }
-
-                        var data_stream_repository = new DataInputStream(json.read());
-                        string data_repository = data_stream_repository.read_until (StringUtil.EMPTY, null);                     
-
-                        File vendor_dir = File.new_for_path (Environment.get_current_dir ().concat("/vendor"));
-
-                        if (!vendor_dir.query_exists ()) {
-                            vendor_dir.make_directory ();
-                        }
-
-                        File package_dir = File.new_for_path (Environment.get_current_dir ().concat("/vendor/").concat(indexes[1]));
-
-                        if (package_dir.query_exists ()) {
-                            continue;
-                        } else {
-                            count++;
-                        }
-
-                        if (count > 1) {
-                            ConsoleUtil.write ("\n");
-                        }
-                        
-                        ConsoleUtil.write_action (indexes[1], vanat_json.require.get(key), "Installing");
-                        
-                        File target = File.new_for_uri ("https://github.com/".concat(key).concat("/archive/master.zip"));
-
-                        if (!target.query_exists()) {               
-                            throw new FileOrDirectoryNotFoundException.MESSAGE("File or Directory doesn't exists\n");
-                        }
-
-                        File destination_zip = File.new_for_path (Path.build_filename (Environment.get_current_dir ().concat("/vendor/").concat(indexes[1] + "-master.zip")));
-                        target.copy (destination_zip, FileCopyFlags.OVERWRITE, null, null);
-
-                        FileUtil.decompress (destination_zip, indexes[1], true);
-
-                        var meson_file = File.new_for_path (Environment.get_current_dir ().concat("/meson.build"));
-
-                        // delete if file already exists
-                        if (!meson_file.query_exists ()) {
-                            throw new FileOrDirectoryNotFoundException.MESSAGE("File meson.build doesn't exists\n");
-                        }
-
-                        FileIOStream ios = meson_file.open_readwrite ();
-                        var dostream = new DataOutputStream (ios.output_stream);        
-                        
-                        string text = "robertsanseries_ffmpeg_cli_wrapper_files,\nrobertsanseries_ffmpeg_cli_wrapper_files,\n";                       
-                        
-                        uint8[] text_data = text.data;
-                        long written = 0;
-                        
-                        //while (written < text_data.length) { 
-                          //  written += dos.write (text_data[written:text_data.length]);
-                        //}
-
-                    }
-                }
-
-                if (count == 0) {
-                    ConsoleUtil.write_custom_color ("> Nothing to install or update", true, false, "while");
-                } else {
-                    ConsoleUtil.write_custom_color ("✓ Completed", true, false, "cyan");
-                }
-            }catch(Error e) {
+                VanatJson vanat_json = new VanatJson(data);
+                this.setting_vendor (vanat_json);
+            } catch (Error e) {
                 error("%s", e.message);
             }
+        }
+
+        private void setting_vendor (VanatJson vanat_json) throws Error {
+            int count = 0;           
+
+            File vendor_dir = File.new_for_path (Environment.get_current_dir ().concat("/vendor"));
+            if (!vendor_dir.query_exists ()) {
+                vendor_dir.make_directory ();
+
+                File vanat_dir = File.new_for_path (Environment.get_current_dir ().concat("/vendor/vanat"));
+                if (!vanat_dir.query_exists ()) {
+                    vanat_dir.make_directory ();
+                    
+                    File installed_json_file = File.new_for_path(Environment.get_current_dir ().concat("/vendor/vanat/installed.json"));
+                    installed_json_file.create (FileCreateFlags.NONE);
+                }
+                
+                File meson_build_file = File.new_for_path(Environment.get_current_dir ().concat("/vendor/meson.build"));
+                FileOutputStream os = meson_build_file.create (FileCreateFlags.NONE);
+                os.write ("vendor = files(\n\n)\n".data);
+            }
+
+            foreach (string key in vanat_json.require.keys) {
+                if (key.contains ("/")) {
+                    string[] indexes = key.split("/");
+                    string user_name = indexes[0];
+                    string package_name = indexes[1];
+
+                    this.download_package(key, user_name, package_name, ref count);                    
+                } else {
+                    throw new JsonException.INVALID_FORMAT ("'require' structure in Json is in invalid format");
+                }
+            }
+
+            if (count == 0) {
+                ConsoleUtil.write_custom_color ("> Nothing to install or update", true, false, "while");
+            } else {
+                ConsoleUtil.write_custom_color ("✓ Completed", true, false, "cyan");
+            }
+        }
+
+        private void download_package (string key, string user_name, string package_name, ref int count) throws Error {
+            string repository = "com.github.".concat(user_name +  "." + package_name);
+            string url = "https://raw.githubusercontent.com/vpackagist/".concat(repository).concat("/master/").concat(repository).concat(".json");
+           
+            File json = File.new_for_uri (url);
+            if (!json.query_exists()) {               
+                throw new FileOrDirectoryNotFoundException.MESSAGE("The json file of the url does not exist\n");
+            }
+
+            File package_dir = File.new_for_path (Environment.get_current_dir ().concat("/vendor/").concat(package_name));
+            if (package_dir.query_exists ()) {
+                continue;
+            } else {
+                count++;
+            }
+                                
+            File target = File.new_for_uri ("https://github.com/".concat(key).concat("/archive/").concat(vanat_json.require.get(key)).concat(".zip"));
+            if (!target.query_exists()) {               
+                throw new FileOrDirectoryNotFoundException.MESSAGE("Release ".concat(vanat_json.require.get(key)).concat(" of the ").concat(key).concat(" package does not exist\n"));
+            }
+
+            if (count > 1) {
+                ConsoleUtil.write ("\n");
+            }
+
+            ConsoleUtil.write_action (package_name, vanat_json.require.get(key), "Installing");
+
+            File destination_zip = File.new_for_path (Path.build_filename (Environment.get_current_dir ().concat("/vendor/").concat(package_name + "-master.zip")));
+            target.copy (destination_zip, FileCopyFlags.OVERWRITE, null, null);
+
+            Array<File> path_names = FileUtil.decompress (destination_zip, package_name, true);
+            for (int i = 0; i < path_names.length ; i++) {
+                if (FileUtil.file_ends_with(path_names.index(i), ".vala")) {
+                    message (path_names.index(i).get_basename() + "\n");
+                }
+            }
+        }
+
+        private void add_package_meson_file () throws Error {
+
         }
 
         /**

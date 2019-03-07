@@ -23,6 +23,7 @@
 
 using Vanat.Commands;
 using Vanat.Collections;
+using Vanat.Exceptions;
 
 namespace Vanat.Utils {
 
@@ -75,7 +76,9 @@ namespace Vanat.Utils {
           return true;
         }
 
-        public static void decompress (GLib.File src, string? name_folder = null,  bool delete_original = false) throws GLib.Error {
+        public static Array<File> decompress (GLib.File src, string? name_folder = null,  bool delete_original = false) throws GLib.Error {
+            Array<File> files = new Array<File> ();
+
             var reader = new Archive.Read ();
             reader.support_filter_bzip2 ();
             reader.support_format_all ();
@@ -90,7 +93,11 @@ namespace Vanat.Utils {
             var name_extracted_folder = "";
 
             while (reader.next_header (out entry) == Archive.Result.OK) {
-                entry.set_pathname (vendor_dir.concat(entry.pathname ()));
+                entry.set_pathname (vendor_dir.concat(entry.pathname ()));                   
+
+                var old_file = File.new_for_path(entry.pathname());
+                var new_file = File.new_for_path(vendor_dir.concat(name_folder).concat("/").concat(old_file.get_basename ()));
+                files.append_val(new_file);
 
                 if (StringUtil.is_blank(name_extracted_folder)) {
                      name_extracted_folder = entry.pathname ();
@@ -121,7 +128,39 @@ namespace Vanat.Utils {
             if (delete_original) {
                 src.delete();
             }
+
+            return files;
         }
 
+        public static bool file_ends_with(File file, string extension) {
+            string str = file.get_basename ();
+            int i = str.last_index_of (".");
+            
+            if (str.substring (i + 1) == extension) {
+                return true;
+            } else if (str.substring (i + 1) == extension.substring (1)) {
+                return true;
+            }
+
+            return false;
+        }
+
+        public string? get_checksum256 (string uri) {
+            File file = File.new_for_uri(uri);
+            if (!file.query_exists()) {               
+                error("The json file of the url does not exist\n");
+            }
+
+            Checksum checksum = new Checksum (ChecksumType.SHA256);
+            FileStream stream = FileStream.open (file.get_path (), "r");
+            uint8 fbuf[100];
+            size_t size;
+
+            while ((size = stream.read (fbuf)) > 0) {
+                checksum.update (fbuf, size);
+            }
+            
+            return checksum.get_string ();
+        }
     }
 }

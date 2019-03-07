@@ -6,10 +6,12 @@ project('vanat', ['vala', 'c'],
 add_project_arguments(['--vapidir', join_paths(meson.current_source_dir(), 'vapi')], language: 'vala')
 
 subdir('src')
+#subdir('vendor')
 
 executable(
     meson.project_name(),
     src_files,
+    #vendor,
     dependencies: [
         dependency('gobject-2.0'),
         dependency('glib-2.0'),

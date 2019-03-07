@@ -4,6 +4,6 @@
     "version": "0.0.1",
     "author": "Robert San <robertsanseries@gmail.com>",
     "require": {
-        "naaando/console-command":"1.0.0"
+        "robertsanseries/ffmpeg-cli-wrapper":"v0.1.0"
     }
 }
