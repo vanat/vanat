@@ -28,12 +28,6 @@ using Vanat.VJson;
 
 namespace Vanat.Commands {
 
-    /**
-     * The {@code InstallCommand} class
-     *
-     * @author Robert San
-     * @since 0.1.0
-     */
     public class InstallCommand {
      
         public InstallCommand () {
@@ -68,20 +62,25 @@ namespace Vanat.Commands {
             File vendor_dir = File.new_for_path (Environment.get_current_dir ().concat("/vendor"));
             if (!vendor_dir.query_exists ()) {
                 vendor_dir.make_directory ();
+            }
 
-                File vanat_dir = File.new_for_path (Environment.get_current_dir ().concat("/vendor/vanat"));
-                if (!vanat_dir.query_exists ()) {
-                    vanat_dir.make_directory ();
-                    
-                    File installed_json_file = File.new_for_path(Environment.get_current_dir ().concat("/vendor/vanat/installed.json"));
-                    installed_json_file.create (FileCreateFlags.NONE);
-                }
-                
-                File meson_build_file = File.new_for_path(Environment.get_current_dir ().concat("/vendor/meson.build"));
+            File vanat_dir = File.new_for_path (Environment.get_current_dir ().concat("/vendor/vanat"));
+            if (!vanat_dir.query_exists ()) {
+                vanat_dir.make_directory ();    
+            }
+
+            File installed_json_file = File.new_for_path(Environment.get_current_dir ().concat("/vendor/vanat/installed.json"));
+            if (!installed_json_file.query_exists ()) {
+                FileOutputStream os = installed_json_file.create (FileCreateFlags.NONE);
+                os.write ("{\n\n}\n".data);
+            }
+            
+            File meson_build_file = File.new_for_path(Environment.get_current_dir ().concat("/vendor/meson.build"));
+            if (!meson_build_file.query_exists ()) {
                 FileOutputStream os = meson_build_file.create (FileCreateFlags.NONE);
                 os.write ("vendor = files(\n\n)\n".data);
             }
-
+            
             foreach (string key in vanat_json.require.keys) {
                 if (key.contains ("/")) {
                     string[] indexes = key.split("/");
@@ -133,11 +132,6 @@ namespace Vanat.Commands {
             FileUtil.decompress (destination_zip, package_name, true);
         }
 
-        /**
-         * [start_process description]
-         * 
-         * @return {[type]} [description]
-         */
         public static InstallCommand start_process () {
             return new InstallCommand ();
         }

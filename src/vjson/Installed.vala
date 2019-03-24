@@ -29,12 +29,12 @@ using Json;
 namespace Vanat.VJson {
 
     /**
-     * The {@code VanatJson} class
+     * The {@code Installed} class
      *
      * @author Robert San
      * @since 0.1.0
      */
-    public class VanatJson {
+    public class Installed {
 
         public string name;
         public string description;
@@ -46,23 +46,21 @@ namespace Vanat.VJson {
          * Constructs a new {@code InstallCommand} object 
          * and sets the default exit folder.
          */
-        public VanatJson (string value)  throws Error  {
+        public Installed (string value)  throws Error  {
 
             if (! StringUtil.is_blank (value)) {
 
                 // Json: (Array: [], Object: {})
                 string data = value;
 
-                // Parse:
                 Json.Parser parser = new Json.Parser ();
                 try {
                     parser.load_from_data (data);
 
-                    // Get the root node:
                     unowned Json.Node node = parser.get_root ();
 
-                    // Process (print) the file:
-                    process (node);
+
+                    process_role_array (node);
                 } catch (Error e) {
                     GLib.error ("Unable to parse the string: %s\n", e.message);
                 }
@@ -71,10 +69,24 @@ namespace Vanat.VJson {
             }
         }
 
-        private void process (Json.Node node) throws Error {
-            if (node.get_node_type () != Json.NodeType.OBJECT) {
+        private void process_role_array (Json.Node node) throws Error {
+            if (node.get_node_type () != Json.NodeType.ARRAY) {
                 throw new JsonException.INVALID_FORMAT ("1- Unexpected element type %s", node.type_name ());
             }
+
+            unowned Json.Array array = node.get_array ();
+			int i = 1;
+
+			foreach (unowned Json.Node item in array.get_elements ()) {
+				process_role (item, i);
+				i++;
+			}
+		}
+
+		private void process_role (Json.Node node, uint number) throws Error {
+			/*if (node.get_node_type () != Json.NodeType.OBJECT) {
+				throw new MyError.INVALID_FORMAT ("Unexpected element type %s", node.type_name ());
+			}
 
             unowned Json.Object obj = node.get_object ();
 
@@ -104,10 +116,10 @@ namespace Vanat.VJson {
                     default:
                         throw new JsonException.INVALID_FORMAT ("2- Unexpected element '%s'", name);
                 }
-            }
+            }*/
         }
 
-        private void process_require (Json.Node node) throws Error {
+        /*private void process_require (Json.Node node) throws Error {
             if (node.get_node_type () != Json.NodeType.OBJECT) {
                 throw new JsonException.INVALID_FORMAT ("3- Unexpected element type %s", node.type_name ());
             }
@@ -119,6 +131,6 @@ namespace Vanat.VJson {
             foreach (unowned string name in obj.get_members()) {
                 this.require.set(name, obj.get_string_member (name));
             }
-        }
+        }*/
     }
 }
