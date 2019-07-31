@@ -52,6 +52,11 @@ namespace Vanat.VJson {
 
                 // Json: (Array: [], Object: {})
                 string data = value;
+                int count_data = data.length;
+
+                if(count_data == 0) {
+                    throw new IllegalArgumentException.MESSAGE("Illegal Argument");
+                }
 
                 // Parse:
                 Json.Parser parser = new Json.Parser ();

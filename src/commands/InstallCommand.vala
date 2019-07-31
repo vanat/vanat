@@ -15,7 +15,7 @@
  * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR O  THER
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
@@ -32,18 +32,12 @@ namespace Vanat.Commands {
      
         public InstallCommand () {
             try {
-                File vanat_json_file = File.new_for_path (Environment.get_current_dir ().concat ("/vanat.json"));
+                File vanat_json_file = File.new_for_path (Environment.get_current_dir ().concat ("/vanat.json"));                                
                 if (!vanat_json_file.query_exists()) {               
                     throw new FileOrDirectoryNotFoundException.MESSAGE("File doesn't exists\n");
                 }
 
-                var meson_file = File.new_for_path (Environment.get_current_dir ().concat("/meson.build"));
-                if (!meson_file.query_exists ()) {
-                    throw new FileOrDirectoryNotFoundException.MESSAGE("File meson.build doesn't exists\n");
-                }
-
                 ConsoleUtil.write_custom_color ("Loading json that are in the package", true, false, "yellow");
-                
                 DataInputStream data_stream = new DataInputStream(vanat_json_file.read());
                 
                 size_t length;
