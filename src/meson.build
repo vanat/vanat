@@ -11,6 +11,7 @@ src_files = files (
     'commands/UpdateCommand.vala',
     'commands/VanatCommand.vala',
     'commands/VersionCommand.vala',
+    'configs/Constants.vala',
     'exceptions/FileOrDirectoryNotFoundException.vala',
     'exceptions/IllegalArgumentException.vala',
     'exceptions/IOException.vala',
