@@ -52,11 +52,6 @@ namespace Vanat.VJson {
 
                 // Json: (Array: [], Object: {})
                 string data = value;
-                int count_data = data.length;
-
-                if(count_data == 0) {
-                    throw new IllegalArgumentException.MESSAGE("Illegal Argument");
-                }
 
                 // Parse:
                 Json.Parser parser = new Json.Parser ();
@@ -72,7 +67,7 @@ namespace Vanat.VJson {
                     GLib.error ("Unable to parse the string: %s\n", e.message);
                 }
             } else {
-                throw new IllegalArgumentException.MESSAGE("");
+                throw new IllegalArgumentException.MESSAGE("Illegal Argument");
             }
         }
 
@@ -105,9 +100,13 @@ namespace Vanat.VJson {
                         unowned Json.Node item = obj.get_member (name);
                         process_require (item);
                         break;
+                    
+                    case "type":
+                    case "license":
+                        break;
 
                     default:
-                        throw new JsonException.INVALID_FORMAT ("2- Unexpected element '%s'", name);
+                        throw new JsonException.INVALID_FORMAT ("2- Unexpected element | unknown value: '%s'", name);
                 }
             }
         }
