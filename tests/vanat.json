@@ -1,0 +1,11 @@
+{
+    "name": "vanat/tests",
+    "description": "vanat test",
+    "version": "1.0",
+    "author": "vanat",
+    "type": "project",
+    "license": "MIT",
+    "require": {
+        "robertsanseries/ffmpeg-cli-wrapper":"v0.1.0"
+    }
+}

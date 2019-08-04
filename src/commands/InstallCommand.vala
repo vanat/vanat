@@ -1,7 +1,7 @@
 /*
  * MIT License
  *
- * Copyright (c) 2018 Vanat 
+ * Copyright (c) 2019 Vanat 
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -52,6 +52,12 @@ namespace Vanat.Commands {
         }
 
         private void setting_vendor (VanatJson vanat_json) throws Error {
+
+            if(vanat_json.require.size == 0) {
+                ConsoleUtil.write_custom_color ("> No packages for installation", true, false, "cyan");
+                return;
+            }
+
             int count = 0;           
 
             File vendor_dir = File.new_for_path (Environment.get_current_dir ().concat("/vendor"));
@@ -83,7 +89,9 @@ namespace Vanat.Commands {
                     string package_name = indexes[1];
 
                     File package_dir = File.new_for_path (Environment.get_current_dir ().concat("/vendor/").concat(package_name));
+                    
                     if (package_dir.query_exists ()) {
+                        ConsoleUtil.write_action (package_name, vanat_json.require.get(key), "Package already installed");
                         continue;
                     } else {
                         this.download_package(vanat_json, key, user_name, package_name);
@@ -98,11 +106,7 @@ namespace Vanat.Commands {
                 }
             }
 
-            if (count == 0) {
-                ConsoleUtil.write_custom_color ("> Nothing to install or update", true, false, "while");
-            } else {
-                ConsoleUtil.write_custom_color ("✓ Completed", true, false, "cyan");
-            }
+            ConsoleUtil.write_custom_color ("✓ Completed", true, false, "cyan");
         }
 
         private void download_package (VanatJson vanat_json, string key, string user_name, string package_name) throws Error {

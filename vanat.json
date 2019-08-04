@@ -1,9 +1,7 @@
 {
     "name": "vanat/vanat",
     "description": "Dependency Manager for Vala",
-    "version": "0.0.1",
+    "version": "1.0",
     "author": "Robert San <robertsanseries@gmail.com>",
-    "require": {
-        "robertsanseries/ffmpeg-cli-wrapper":"v0.1.0"
-    }
+    "require": { }
 }
