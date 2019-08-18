@@ -58,8 +58,6 @@ namespace Vanat.Commands {
                 return;
             }
 
-            int count = 0;           
-
             File vendor_dir = File.new_for_path (Environment.get_current_dir ().concat("/vendor"));
             if (!vendor_dir.query_exists ()) {
                 vendor_dir.make_directory ();
@@ -82,6 +80,14 @@ namespace Vanat.Commands {
                 os.write ("# This file is @generated automatically by Vanat \n\nvendor = files(\n\n)\n".data);
             }
             
+            this.download_package_recursive (vanat_json);
+            ConsoleUtil.write_custom_color ("✓ Completed", true, false, "cyan");
+        }
+
+        private void download_package_recursive (VanatJson vanat_json) throws Error {
+
+            int count = 0;
+
             foreach (string key in vanat_json.require.keys) {
                 if (key.contains ("/")) {
                     string[] indexes = key.split("/");
@@ -105,8 +111,6 @@ namespace Vanat.Commands {
                     throw new JsonException.INVALID_FORMAT ("'require' structure in Json is in invalid format");
                 }
             }
-
-            ConsoleUtil.write_custom_color ("✓ Completed", true, false, "cyan");
         }
 
         private void download_package (VanatJson vanat_json, string key, string user_name, string package_name) throws Error {
@@ -124,6 +128,8 @@ namespace Vanat.Commands {
             }
 
             ConsoleUtil.write_action (package_name, vanat_json.require.get(key), "Installing");
+
+            message(Environment.get_current_dir ().concat("/vendor/").concat(package_name + "-master.zip"));
 
             File destination_zip = File.new_for_path (Path.build_filename (Environment.get_current_dir ().concat("/vendor/").concat(package_name + "-master.zip")));
             target.copy (destination_zip, FileCopyFlags.OVERWRITE, null, null);

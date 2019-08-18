@@ -53,7 +53,7 @@ namespace Vanat.Utils {
             directory.delete();
         }
 
-        public static bool copy_recursive (GLib.File src, GLib.File dest, GLib.FileCopyFlags flags = GLib.FileCopyFlags.NONE, GLib.Cancellable? cancellable = null) throws GLib.Error {
+        public static bool copy_recursive (GLib.File src, GLib.File dest, GLib.FileCopyFlags flags = GLib.FileCopyFlags.ALL_METADATA, GLib.Cancellable? cancellable = null) throws GLib.Error {
           GLib.FileType src_type = src.query_file_type (GLib.FileQueryInfoFlags.NONE, cancellable);
           if ( src_type == GLib.FileType.DIRECTORY ) {
             dest.make_directory (cancellable);
@@ -71,7 +71,11 @@ namespace Vanat.Utils {
             }
           } else if ( src_type == GLib.FileType.REGULAR ) {
             src.copy (dest, flags, cancellable);
+            //message(dest.get_path ());
           }
+
+          //permission files
+          //GLib.FileUtils.chmod(dest.get_path (), 0777);
 
           return true;
         }
