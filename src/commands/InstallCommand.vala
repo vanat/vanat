@@ -114,17 +114,20 @@ namespace Vanat.Commands {
         }
 
         private void download_package (VanatJson vanat_json, string key, string user_name, string package_name) throws Error {
-            string repository = "com.github.".concat(user_name +  "." + package_name);
-            string url = "https://raw.githubusercontent.com/vpackagist/".concat(repository).concat("/master/").concat(repository).concat(".json");
+            // string repository = "com.github.".concat(user_name +  "." + package_name);
+            // string url = "https://raw.githubusercontent.com/vpackagist/".concat(repository).concat("/master/").concat(repository).concat(".json");
            
-            File json = File.new_for_uri (url);
-            if (!json.query_exists()) {               
-                throw new FileOrDirectoryNotFoundException.MESSAGE("The json file of the url does not exist\n");
-            }
+            // File json = File.new_for_uri (url);
+            // if (!json.query_exists()) {               
+            //     throw new FileOrDirectoryNotFoundException.MESSAGE("The json file of the url does not exist\n");
+            // }
                                
-            File target = File.new_for_uri ("https://github.com/".concat(key).concat("/archive/").concat(vanat_json.require.get(key)).concat(".zip"));
-            if (!target.query_exists()) {               
-                throw new FileOrDirectoryNotFoundException.MESSAGE("Release ".concat(vanat_json.require.get(key)).concat(" of the ").concat(key).concat(" package does not exist\n"));
+            File target = File.new_for_uri ("https://github.com/".concat(key).concat("/archive/refs/tags/").concat(vanat_json.require.get(key)).concat(".zip"));
+            if (!target.query_exists()) {
+                target = File.new_for_uri ("https://github.com/".concat(key).concat("/archive/refs/heads/main.zip"));
+                if (!target.query_exists()) {
+                    throw new FileOrDirectoryNotFoundException.MESSAGE("Release ".concat(vanat_json.require.get(key)).concat(" of the ").concat(key).concat(" package does not exist\n"));    
+                }                
             }
 
             ConsoleUtil.write_action (package_name, vanat_json.require.get(key), "Installing");
