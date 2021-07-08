@@ -33,12 +33,12 @@ namespace Vanat.Collections {
         /**
          * 
          */
-        private weak Gee.Set<K> _keyset;
+        private weak Gee.Set<weak K> _keyset;
 
         /**
          * 
          */
-        private weak Gee.Collection<V> _values;
+        private weak Gee.Collection<weak V> _values;
 
         /**
          * 
@@ -49,14 +49,14 @@ namespace Vanat.Collections {
          * [_keys description]
          * @type {ArrayList}
          */
-        internal Gee.ArrayList<K> _keys = new Gee.ArrayList<K>();
+        internal Gee.ArrayList<weak K> _keys = new Gee.ArrayList<weak K>();
 
 
         public new Gee.Set<unowned K> keys {
             owned get {
-                Gee.Set<K> keys = _keyset;
+                Gee.Set<weak K> keys = _keyset;
                 if (_keyset == null) {
-                    keys = new KeySet<K> (_keys);
+                    keys = new KeySet<weak K> (_keys);
                     _keyset = keys;
                     keys.add_weak_pointer ((void**) (&_keyset));
                 }
@@ -69,7 +69,7 @@ namespace Vanat.Collections {
          */
         public new Gee.Collection<unowned V> values {
             owned get {
-                Gee.Collection<K> values = _values;
+                Gee.Collection<weak K> values = _values;
                 if (_values == null) {
                     
                     values = new ValueCollection<K,V> (this);
@@ -295,7 +295,7 @@ namespace Vanat.Collections {
             /**
              * 
              */
-            protected Gee.Iterator<K> _keys;
+            protected Gee.Iterator<weak K> _keys;
 
             /**
              * [ValueIterator description]
@@ -454,7 +454,7 @@ namespace Vanat.Collections {
             /**
              * 
              */
-            protected Gee.Iterator<K> _keys;
+            protected Gee.Iterator<weak K> _keys;
 
             /**
              * 
