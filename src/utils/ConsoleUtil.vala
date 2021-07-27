@@ -104,10 +104,10 @@ namespace Vanat.Utils {
 
         /**
          * [write_custom_color_map description]
-         * @param  {[type]} LinkedHashMap<string, string>       list [description]
+         * @param  {[type]} Gee.Map<string, string>       list [description]
          * @return {[type]}                       [description]
          */
-        public static void write_custom_color_map (LinkedHashMap<string, string> list) {
+        public static void write_custom_color_map (Gee.Map<string, string> list) {
             foreach (string key in list.keys) {
                 string text_to_be_printed =  TextColorUtil.custom_color (list.get(key), key);
                 stdout.printf (text_to_be_printed);                
@@ -128,10 +128,10 @@ namespace Vanat.Utils {
 
         /**
          * [write_option_custom_color description]
-         * @param  {[type]} LinkedHashMap<K,V> list          [description]
+         * @param  {[type]} Gee.Map<K,V> list          [description]
          * @return {[type]}                    [description]
          */
-        public static void write_options_custom_color (LinkedHashMap<string,string> list) {
+        public static void write_options_custom_color (Gee.Map<string,string> list) {
 
             int max_value_length = 0;
 
