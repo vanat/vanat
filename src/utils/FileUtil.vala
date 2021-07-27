@@ -22,7 +22,6 @@
  */
 
 using Vanat.Commands;
-using Vanat.Collections;
 using Vanat.Exceptions;
 
 namespace Vanat.Utils {
