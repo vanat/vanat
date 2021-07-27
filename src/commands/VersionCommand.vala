@@ -38,7 +38,7 @@ namespace Vanat.Commands {
          * and sets the default exit folder.
          */
         public VersionCommand () {
-            LinkedHashMap<string, string> msg = new LinkedHashMap<string, string>();
+            Gee.HashMap<string, string> msg = new Gee.HashMap<string, string>();
             msg.set("green", "Vanat");
             msg.set("white", "version");
             msg.set("yellow", "0.1.0");
