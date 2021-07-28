@@ -22,7 +22,6 @@
  */
 
 using Vanat.Utils;
-using Vanat.Collections;
 
 namespace Vanat.Commands {
 
@@ -40,11 +39,11 @@ namespace Vanat.Commands {
          * @return {[type]} [description]
          */
         public HelpCommand () {
-            LinkedHashMap<string, string> options = new LinkedHashMap<string, string>();
+            Gee.HashMap<string, string> options = new Gee.HashMap<string, string>();
             options.set("-h, --help", "Display this help message");
             options.set("-v, --version", "Display this application version");
 
-            LinkedHashMap<string, string> available_commands = new LinkedHashMap<string, string>();
+            Gee.HashMap<string, string> available_commands = new Gee.HashMap<string, string>();
             available_commands.set("about", "Short information about Vanat");
             //available_commands.set("create-project", "Create new project from a package into given directory.");
             available_commands.set("help", "Display this help message");
