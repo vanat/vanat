@@ -21,6 +21,7 @@
  * SOFTWARE.
  */
 
+using Vanat.Collections;
 using Vanat.Exceptions;
 using Vanat.Utils;
 using Json;

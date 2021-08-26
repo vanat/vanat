@@ -22,6 +22,7 @@
  */
 
 using Vanat.Commands;
+using Vanat.Collections;
 
 namespace Vanat.Utils {
 
