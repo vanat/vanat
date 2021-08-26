@@ -2,3 +2,6 @@
 build/*
 tests/vendor/*
 vendor/*
+
+# Mac OS
+.DS_Store
