@@ -18,7 +18,9 @@
 
 `Vanat` is a tool for dependency management in Vala. It allows you to declare the libraries your project depends on and it will manage (install/update) them for you. We believe development must be an enjoyable and creative experience to be truly fulfilling.
 
-For more information on: what is Vanat, how to install and how to use it. Visit our site https://vanat.github.io
+### Installation/Usage
+
+For more information on: what is Vanat, how to install it and how to use it. Follow the official instructions in the documentation available on our website: https://vanat.github.io
 
 ### License
 
