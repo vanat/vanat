@@ -40,23 +40,22 @@ namespace Vanat.Commands {
          * @return {[type]} [description]
          */
         public VanatCommand (string arg = "") {
-            ConsoleUtil.write_custom_color("°°°°°°°°°°°°|\\", true, false, "white");
-            ConsoleUtil.write_custom_color("°°°°°°°°°°°°|_\\", true, false, "white");
-            ConsoleUtil.write_custom_color("°°°°°°°°°°°°|__\\", true, false, "white");
-            ConsoleUtil.write_custom_color("°°°°°°°°°°°°|___\\", true, false, "white");
-            ConsoleUtil.write_custom_color("°°°°°°°°°°°°|____\\", true, false, "white");
-            ConsoleUtil.write_custom_color("°°°°°°°°°°°°|_____\\°°°°°°", true, false, "white");
-            ConsoleUtil.write_custom_color("°°°°°°°°°°°°|______\\°°°°°°", true, false, "white");
-            ConsoleUtil.write_custom_color("°°°°°°______|_______________", true, false, "white");
-            ConsoleUtil.write_custom_color("~~~~\\____________________/~~~~", true, false, "white");
-            ConsoleUtil.write_custom_color(",.-~*´¨¯¨`*·~-.¸,.-~*´¨¯¨`*·~-", true, false, "white");
-            ConsoleUtil.write_custom_color(".¸,.-~*´¨¯¨`*·~-.¸,.-~*´¨¯¨`*·~-", true, false, "white");
+            ConsoleUtil.write_custom_color("                *  |*\\                            ", true, false, "white");
+            ConsoleUtil.write_custom_color("                   ||_\\                 *         ", true, false, "white");
+            ConsoleUtil.write_custom_color("       *           ||__\\      *                   ", true, false, "white");
+            ConsoleUtil.write_custom_color("                   ||___\\                         ", true, false, "white");
+            ConsoleUtil.write_custom_color("             *     ||____\\                        ", true, false, "white");
+            ConsoleUtil.write_custom_color("                   ||_____\\  *                    ", true, false, "white");
+            ConsoleUtil.write_custom_color("   *               ||______\\          *           ", true, false, "white");
+            ConsoleUtil.write_custom_color("     ______________||__________________________    ", true, false, "white");
+            ConsoleUtil.write_custom_color("     \\                                       /    ", true, false, "white");
+            ConsoleUtil.write_custom_color("~´¨¯´~\\ " + TextColorUtil.custom_color ("Vanat ~ Dependency Manager for vala", "yellow") + "/*·~-~*", true, false, "white");
+            ConsoleUtil.write_custom_color("-~*´¯¨`\\___________________________________/*´¨`*·~-", true, false, "white");
+            ConsoleUtil.write_custom_color(",.-~*´¨¯¨`*·~-.¸,.-~*´¨¯¨`*·~-¸,.-~*´¨¯¨`*·~-´¨¯¨`*¨¯", true, false, "white");
+            ConsoleUtil.write_custom_color(".¸,.`*·~-.¸,.-~*´¨¯¨`*·~-~*´¨¯¨`*·~-´¨¯¨`*·~-~-`*·~-", true, false, "white");
 
             ConsoleUtil.write(StringUtil.BREAK_LINE);
             VersionCommand.start_process ();
-
-            ConsoleUtil.write(StringUtil.BREAK_LINE);
-            ConsoleUtil.info ("Run '" + arg + " --help' to see a full list of available command line options.");
         }
 
         /**

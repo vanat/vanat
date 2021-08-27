@@ -61,6 +61,7 @@ namespace Vanat {
 
             if (args.length < 2) {
                 this.commands.start_command_vanat (args[0]);
+                this.commands.start_command_help ();
                 return 0;
             }
                

@@ -54,9 +54,7 @@ namespace Vanat.Commands {
             available_commands.set("list", "Lists commands");
             //available_commands.set("remove", "Removes a package from the require.");
             //available_commands.set("require", "Adds required packages to your vanat.json and installs them");
-            //available_commands.set("update", "Updates your dependencies to the latest version according to vanat.json, and updates the vanat.lock file.");            
-
-            VersionCommand.start_process ();
+            //available_commands.set("update", "Updates your dependencies to the latest version according to vanat.json, and updates the vanat.lock file.");
 
             ConsoleUtil.write_title_custom_color("Usage:");
             ConsoleUtil.write_custom_color("command [options] [arguments]", true, true, "white");
