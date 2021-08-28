@@ -109,7 +109,7 @@ namespace Vanat.Utils {
          */
         public static void write_custom_color_map (LinkedHashMap<string, string> list) {
             foreach (string key in list.keys) {
-                string text_to_be_printed =  TextColorUtil.custom_color (key, list.get(key));
+                string text_to_be_printed =  TextColorUtil.custom_color (key + StringUtil.EMPTY, list.get(key));
                 stdout.printf (text_to_be_printed);                
             }
 

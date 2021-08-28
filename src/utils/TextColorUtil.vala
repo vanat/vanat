@@ -56,36 +56,35 @@ namespace Vanat.Utils {
          * @return {@code void}
          */
         public static string custom_color (string value, string text_color = "", string background_color = "") {
-        	string SPACE = " ";
             string text_temp = "";
 
             switch (text_color) {
                 case "black":
-                    text_temp = text_temp.concat(@"\x1b[30m$value\x1b[0m").concat(SPACE);
+                    text_temp = text_temp.concat(@"\x1b[30m$value\x1b[0m");
                     break;
                 case "red":
-                    text_temp = text_temp.concat(@"\x1b[31m$value\x1b[0m").concat(SPACE);
+                    text_temp = text_temp.concat(@"\x1b[31m$value\x1b[0m");
                     break;
                 case "green":
-                    text_temp = text_temp.concat(@"\x1b[32m$value\x1b[0m").concat(SPACE);
+                    text_temp = text_temp.concat(@"\x1b[32m$value\x1b[0m");
                     break;
                 case "yellow":
-                    text_temp = text_temp.concat(@"\x1b[33m$value\x1b[0m").concat(SPACE);
+                    text_temp = text_temp.concat(@"\x1b[33m$value\x1b[0m");
                     break;
                 case "blue":
-                    text_temp = text_temp.concat(@"\x1b[34m$value\x1b[0m").concat(SPACE);
+                    text_temp = text_temp.concat(@"\x1b[34m$value\x1b[0m");
                     break;
                 case "magenta":
-                    text_temp = text_temp.concat(@"\x1b[35m$value\x1b[0m").concat(SPACE);
+                    text_temp = text_temp.concat(@"\x1b[35m$value\x1b[0m");
                     break;
                 case "cyan":
-                    text_temp = text_temp.concat(@"\x1b[36m$value\x1b[0m").concat(SPACE);
+                    text_temp = text_temp.concat(@"\x1b[36m$value\x1b[0m");
                     break;
                 case "white":
-                    text_temp = text_temp.concat(@"\x1b[37m$value\x1b[0m").concat(SPACE);
+                    text_temp = text_temp.concat(@"\x1b[37m$value\x1b[0m");
                     break;
                 default:
-                    text_temp = text_temp.concat(@"$value").concat(SPACE);
+                    text_temp = text_temp.concat(@"$value");
                     break;
             }
 

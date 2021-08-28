@@ -47,9 +47,18 @@ namespace Vanat.Commands {
             ConsoleUtil.write(StringUtil.BREAK_LINE);
             ConsoleUtil.write_custom_color("This command will guide you through creating your vanat.json config.", true, false);
 
+            string current_dir_s = Environment.get_current_dir ();
+            string[] current_dir = current_dir_s.split("/");
+            string name_current_dir = current_dir[current_dir.length - 1 ] ;
+            string suggestion_name_package = Environment.get_user_name () + "/" + name_current_dir;
+
             ConsoleUtil.write(StringUtil.BREAK_LINE);
-            ConsoleUtil.write("Package name (<user>/<name>): ");
+            ConsoleUtil.write("Package name (<user>/<name>) [" + TextColorUtil.custom_color (suggestion_name_package, "yellow") + "]:");
             string package = stdin.read_line ();
+
+            if (package.length == 0) {
+                package = suggestion_name_package;
+            }
 
             ConsoleUtil.write("Description: ");
             string description = stdin.read_line ();

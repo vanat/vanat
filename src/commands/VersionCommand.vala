@@ -40,9 +40,9 @@ namespace Vanat.Commands {
          */
         public VersionCommand () {
             LinkedHashMap<string, string> msg = new LinkedHashMap<string, string>();
-            msg.set("Vanat", "green");
-            msg.set("version", "white");
-            msg.set("0.1.0", "yellow");
+            msg.set("Vanat ", "green");
+            msg.set("version ", "white");
+            msg.set("0.1.0 ", "yellow");
             msg.set("2021-08-26 16:17:23", "cyan");
             ConsoleUtil.write_custom_color_map(msg);
         }

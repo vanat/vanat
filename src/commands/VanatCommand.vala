@@ -49,7 +49,7 @@ namespace Vanat.Commands {
             ConsoleUtil.write_custom_color("   *               ||______\\          *           ", true, false, "white");
             ConsoleUtil.write_custom_color("     ______________||__________________________    ", true, false, "white");
             ConsoleUtil.write_custom_color("     \\                                       /    ", true, false, "white");
-            ConsoleUtil.write_custom_color("~´¨¯´~\\ " + TextColorUtil.custom_color ("Vanat ~ Dependency Manager for vala", "yellow") + "/*·~-~*", true, false, "white");
+            ConsoleUtil.write_custom_color("~´¨¯´~\\ " + TextColorUtil.custom_color ("Vanat ~ Dependency Manager for vala", "yellow") + " /*·~-~*", true, false, "white");
             ConsoleUtil.write_custom_color("-~*´¯¨`\\___________________________________/*´¨`*·~-", true, false, "white");
             ConsoleUtil.write_custom_color(",.-~*´¨¯¨`*·~-.¸,.-~*´¨¯¨`*·~-¸,.-~*´¨¯¨`*·~-´¨¯¨`*¨¯", true, false, "white");
             ConsoleUtil.write_custom_color(".¸,.`*·~-.¸,.-~*´¨¯¨`*·~-~*´¨¯¨`*·~-´¨¯¨`*·~-~-`*·~-", true, false, "white");
