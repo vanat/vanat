@@ -12,6 +12,7 @@ src_files = files (
     'commands/VanatCommand.vala',
     'commands/VersionCommand.vala',
     'configs/Constants.vala',
+    'configs/GitConfig.vala',
     'exceptions/FileOrDirectoryNotFoundException.vala',
     'exceptions/IllegalArgumentException.vala',
     'exceptions/IOException.vala',

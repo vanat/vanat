@@ -24,23 +24,31 @@
 namespace Vanat.Utils {
 
     /**
-     * The {@code GitConfigUtil} class
+     * The {@code GitConfig} class
      *
      * @author Robert San
      * @since 0.1.0
      */
-    public class GitConfigUtil {
+    public class GitConfig {
 
         public static void initGitConfigUtil () {
             stdout.printf("global_config_file");
-            var global_config_file = Ggit.Config.find_global();
+            
+            //Ggit.Config? global_config_file = null;
 
-            if (global_config_file == null)
-            {
-                ConsoleUtil.write("erro 1.1");
-            } else {
-                ConsoleUtil.write("erro 1.2");
+            try {
+                var global_config_file = Ggit.Config.find_global ();    
+            } catch (Error e) {
+                stderr.printf(e.message);
             }
+            
+
+            // if (global_config_file == null)
+            // {
+            //     ConsoleUtil.write("erro 1.1");
+            // } else {
+            //     ConsoleUtil.write("erro 1.2");
+            // }
 
             // Ggit.Config? global_config;
 
@@ -70,18 +78,17 @@ namespace Vanat.Utils {
         //        }
         //    }
 
-        private string read_config_string(Ggit.Config config, string name)
-        {
-            string defval = "";
-            string? ret = null;
+        // private string read_config_string(Ggit.Config config, string name)
+        // {
+        //     string defval = "";
+        //     string? ret = null;
 
-            try
-            {
-                ret = config.snapshot().get_string(name);
-            } catch {}
+        //     try
+        //     {
+        //         ret = config.snapshot().get_string(name);
+        //     } catch {}
 
-            return ret != null ? ret : defval;
-        }
-
+        //     return ret != null ? ret : defval;
+        // }
     }
 }

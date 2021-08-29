@@ -60,6 +60,8 @@ namespace Vanat.Commands {
                 package = suggestion_name_package;
             }
 
+            GitConfig.initGitConfigUtil();
+
             ConsoleUtil.write("Description: ");
             string description = stdin.read_line ();
 

@@ -20,6 +20,7 @@ executable(
         dependency('libarchive'),
         dependency('libsoup-2.4'),
         dependency('json-glib-1.0'),
+        dependency('libgit2-glib-1.0')
     ],
     vala_args: [
         '--vapidir=' + meson.source_root() + '/vapi/',
